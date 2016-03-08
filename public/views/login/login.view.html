@@ -1,0 +1,48 @@
+<div ng-controller="LoginController" class="row">
+    <style>
+        body{
+            background-image: url("../../img/login02.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
+    </style>
+    <div class="login">
+        <div class="col-xs-12 col-sm-6">
+
+            <!--<img src="../../img/login.jpg"-->
+            <!--style="width:700px;height:400px;">-->
+
+        </div>
+
+        <div class="col-xs-12 col-sm-5" style="padding-left: 40px">
+
+            <!--Didn't know how to make form-control also in one line. Submit button also has some problem-->
+            <form class="form-horizontal">
+                <h1 style="color: white">Login</h1>
+                <div class="form-group">
+                    <label for="username" style="color: white">Username</label>
+                    <input ng-model="username" id="username" type="text" class="form-control" placeholder="username">
+                </div>
+                <div class="form-group">
+                    <label for="password" style="color: white">Password</label>
+                    <input ng-model="password" id="password" type="password" class="form-control" placeholder="password">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label"></label>
+
+                    <div>
+                        <button ng-click="login()" type="submit" class="btn btn-default">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+

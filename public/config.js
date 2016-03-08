@@ -25,9 +25,9 @@
 
             }).
 
-            when('/forms', {
-                templateUrl: 'views/form/forms.view.html',
-                controller:'FormController'
+            when('/services', {
+                templateUrl: 'views/mainpage/mainpage.view.html'
+
 
             }).
             when('/register', {

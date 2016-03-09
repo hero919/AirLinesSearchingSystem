@@ -20,6 +20,17 @@
         }
 
     }
+
+    .firstLine{
+        padding-top: 30px;
+    }
+    .secondLine{
+        padding-top: 20px;
+    }
+
+    .maxFlights{
+        padding-top: 30px;
+    }
     .searchButton{
         padding-top: 100px;
     }
@@ -45,7 +56,7 @@
         <div>
             <h1>Seaching Flight</h1>
         </div>
-        <div class="form-inline" role="form">
+        <div class="form-inline firstLine" role="form">
             <div class="form-group">
                 <div>
                 <label for="flyFrom">Flying from</label>
@@ -61,7 +72,7 @@
             </div>
         </div>
 
-        <div class="form-inline" role="form">
+        <div class="form-inline secondLine" role="form">
             <div class="form-group">
                 <div>
                     <label for="year">Year</label>
@@ -83,6 +94,18 @@
                 <input id="day" class="form-control" style="width: 200px;" placeholder="Day">
             </div>
         </div>
+
+
+         <div>
+             <div class="maxFlights">
+                 <label for="maxFlights">MaxFlights</label>
+             </div>
+             <input id="maxFlights" class="form-control" style="width: 200px;" placeholder="MaxFlights">
+
+
+         </div>
+
+
 
         <div class="searchButton">
             <button ng-click="" type="submit" class="btn btn-default">Search</button>

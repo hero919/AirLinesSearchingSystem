@@ -28,6 +28,7 @@
             when('/airlinesSearching', {
                 templateUrl: 'views/airlinesSearching/airlinesSearching.view.html',
                 controller: 'airlinesSearchingController'
+                //controllerAs: "model"
             }).
             when('/register', {
                 templateUrl: 'views/register/register.view.html',

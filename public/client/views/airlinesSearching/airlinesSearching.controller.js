@@ -10,7 +10,31 @@
 
     //UserService, $rootScope, $location,$scope
 
-    function airlinesSearchingController(){
+    function airlinesSearchingController($scope, flightStatesService){
+
+
+
+
+        $scope.search = search;
+
+
+        function search(flight){
+
+            flightStatesService.searchFlightByAirport(flight).then(function(response){
+                console.log(response);
+                $scope.flights = response.flightStatuses;
+
+                if(response.flightStatuses.length==0){
+                    $scope.message = response.error.errorMessage;
+
+                }else{
+                    $scope.message = "Successfully search " + response.flightStatuses.length + " results for you";
+
+                }
+
+
+            })
+        }
 
         //$scope.login =
         //    function(){

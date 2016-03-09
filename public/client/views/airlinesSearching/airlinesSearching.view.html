@@ -56,19 +56,22 @@
         <div>
             <h1>Seaching Flight</h1>
         </div>
-        <div class="form-inline firstLine" role="form">
+         <div ng-show="message" class="alert alert-success" role="alert">{{message}} </div>
+
+
+         <div class="form-inline firstLine" role="form">
             <div class="form-group">
                 <div>
                 <label for="flyFrom">Flying from</label>
                 </div>
-                <input id="flyFrom" class="form-control" style="width: 300px; margin-right: 20px" placeholder="Airport">
+                <input ng-model="flight.from" id="flyFrom" class="form-control" style="width: 300px; margin-right: 20px" placeholder="Airport">
             </div>
 
             <div class="form-group">
                 <div>
                 <label for="flyTo">Flying to</label>
                 </div>
-                <input id="flyTo" class="form-control" style="width: 300px;" placeholder="Airport">
+                <input ng-model="flight.to" id="flyTo" class="form-control" style="width: 300px;" placeholder="Airport">
             </div>
         </div>
 
@@ -77,21 +80,21 @@
                 <div>
                     <label for="year">Year</label>
                 </div>
-                <input id="year" class="form-control" style="width: 200px; margin-right: 10px" placeholder="Year">
+                <input ng-model="flight.year" id="year" class="form-control" style="width: 200px; margin-right: 10px" placeholder="Year">
             </div>
 
             <div class="form-group">
                 <div>
                     <label for="month">Month</label>
                 </div>
-                <input id="month" class="form-control" style="width: 200px; margin-right: 10px" placeholder="Month">
+                <input ng-model="flight.month" id="month" class="form-control" style="width: 200px; margin-right: 10px" placeholder="Month">
             </div>
 
             <div class="form-group">
                 <div>
                     <label for="day">Day</label>
                 </div>
-                <input id="day" class="form-control" style="width: 200px;" placeholder="Day">
+                <input ng-model="flight.day" id="day" class="form-control" style="width: 200px;" placeholder="Day">
             </div>
         </div>
 
@@ -100,7 +103,7 @@
              <div class="maxFlights">
                  <label for="maxFlights">MaxFlights</label>
              </div>
-             <input id="maxFlights" class="form-control" style="width: 200px;" placeholder="MaxFlights">
+             <input ng-model="flight.maxFlights" id="maxFlights" class="form-control" style="width: 200px;" placeholder="MaxFlights">
 
 
          </div>
@@ -108,13 +111,55 @@
 
 
         <div class="searchButton">
-            <button ng-click="" type="submit" class="btn btn-default">Search</button>
+            <button ng-click="search(flight)" type="submit" class="btn btn-default">Search</button>
         </div>
     </div>
 
     </div>
 </div>
 
+
+    <div ng-if="flights.flightStatuses.length != 0">
+        <h3>Search Results</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Flight Carrier Name</th>
+                <th>Flight Number</th>
+                <th>Publidhed Departure Time(Local)</th>
+                <th>Published Arrival Time(Local)</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="flight in flights">
+
+                <td>
+                    {{flight.carrierFsCode}}
+                </td>
+                <td>
+                    {{flight.flightNumber}}
+                </td>
+
+                <td>
+                    {{flight.operationalTimes.publishedDeparture.dateLocal}}
+                </td>
+                <td>
+                    {{flight.operationalTimes.publishedArrival.dateLocal}}
+                </td>
+
+
+
+                <!--<td>-->
+                    <!--<a href="#/details/{{movie.imdbID}}">-->
+                        <!--{{movie.Title}}-->
+                    <!--</a>-->
+                <!--</td>-->
+                <!--<td>{{movie.imdbID}}</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 
 

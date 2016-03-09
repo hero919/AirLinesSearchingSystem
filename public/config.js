@@ -25,18 +25,18 @@
 
             }).
 
-            when('/services', {
-                templateUrl: 'views/mainpage/mainpage.view.html'
-
-
+            when('/airlinesSearching', {
+                templateUrl: 'views/airlinesSearching/airlinesSearching.view.html',
+                controller: 'airlinesSearchingController'
             }).
             when('/register', {
                 templateUrl: 'views/register/register.view.html',
                 controller: 'RegisterController'
 
             }).
-            when('/admin', {
-                templateUrl: 'views/admin/admin.view.html'
+            when('/favoriteAirlines', {
+                templateUrl: 'views/favoriteAirlines/favoriteAirlines.view.html',
+                controller: 'favoriteAirlinesController'
 
             }).
             when('/form-fields', {

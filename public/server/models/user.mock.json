@@ -1,0 +1,18 @@
+[
+  {
+    "_id": 123,
+    "firstName": "Alice",
+    "lastName": "Wonderland",
+    "username": "alice",
+    "password": "alice",
+    "email":"alice@yahoo.com"
+  },
+  {
+    "_id": 234,
+    "firstName": "Bob",
+    "lastName": "Marlin",
+    "username": "bob",
+    "password": "bob",
+    "email":"bob@husky.neu.edu"
+  }
+]

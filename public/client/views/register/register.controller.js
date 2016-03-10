@@ -8,32 +8,23 @@
         .controller('RegisterController',RegisterController);
 
     //UserService, $rootScope, $location,$scope
-    function RegisterController() {
+    function RegisterController(UserService, $scope, $location) {
+        $scope.register = register;
 
-        //var vm = this;
 
-
-    //
-    //    $scope.register =
-    //        function (){
-    //
-    //            if ($scope.password === $scope.verifyPassword) {
-    //                var newUser = {
-    //                    "username": $scope.username,
-    //                    "password": $scope.password,
-    //                    "email": $scope.email
-    //                };
-    //                UserService.createUser(newUser, function (newUser) {
-    //                    $rootScope.newUser = newUser;
-    //                    $location.url("/profile");
-    //
-    //                });
-    //                console.log(newUser);
-    //            }
-    //            else{
-    //                alert("The password is not the same as verified password.");
-    //            }
-    //        }
+        function register(user) {
+            console.log(user);
+            UserService
+                .register(user)
+                .then(function(response){
+                    var currentUser = response;
+                    if(currentUser != null) {
+                        console.log(currentUser);
+                        UserService.setCurrentUser(currentUser);
+                        $location.url("/profile");
+                    }
+                });
+        }
     }
 
 

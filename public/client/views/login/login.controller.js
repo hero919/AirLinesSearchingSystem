@@ -2,32 +2,72 @@
  * Created by zeqingzhang on 3/7/16.
  */
 (function(){
-    'use strict';
-    angular.
-        module('airlines')
-        .controller("LoginController",LoginController);
+    angular
+        .module("airlines")
+        .controller("LoginController", loginController);
 
 
-    //UserService, $rootScope, $location,$scope
+    function loginController(UserService, $location, $scope) {
+        //console.log("Test Login");
+       // var vm = this;
 
-    function LoginController(){
+        $scope.login = login;
 
-        //$scope.login =
-        //    function(){
-        //        UserService.findUserByUsernameAndPassword($scope.username, $scope.password, function(user){
-        //            if(user !== null) {
-        //                console.log("logged in");
-        //                $rootScope.user = user;
-        //                $location.url('/profile');
-        //            }else{
-        //                console.log("Can't find the user");
-        //
-        //            }
-        //        })
-        //    }
+        function init() {
+        }
+        init();
 
+        function login(user) {
+            console.log(user);
+            if(!user) {
+                return;
+            }
 
-
+            UserService
+                .login({
+                    username: user.username,
+                    password: user.password
+                })
+                .then(function(response){
+                    console.log(response);
+                    //response.data
+                    if(response!=null) {
+                        console.log("successful");
+                        UserService.setCurrentUser(response);
+                        $location.url("/profile");
+                    }else{
+                        $scope.message = "The Username or Password is not correct";
+                    }
+                });
+        }
     }
 
+    //function loginController(UserService, $location) {
+    //    console.log("Test Login");
+    //    var vm = this;
+    //
+    //    vm.login = login;
+    //
+    //    function init() {
+    //    }
+    //    init();
+    //
+    //    function login(user) {
+    //        console.log(user);
+    //        if(!user) {
+    //            return;
+    //        }
+    //        UserService
+    //            .login({
+    //                username: user.username,
+    //                password: user.password
+    //            })
+    //            .then(function(response){
+    //                if(response.data) {
+    //                    UserService.setCurrentUser(response.data);
+    //                    $location.url("/profile");
+    //                }
+    //            });
+    //    }
+    //}
 })();

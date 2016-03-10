@@ -16,6 +16,27 @@
 
 
         $scope.search = search;
+        $scope.like = like;
+
+
+
+
+
+
+        function like(){
+
+
+
+
+
+
+
+        }
+
+
+
+
+
 
 
         function search(flight){

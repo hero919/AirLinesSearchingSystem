@@ -159,8 +159,22 @@
 //
 
 var express = require('express');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var app = express();
+var bodyParser = require('body-parser');
+//var multer = require('multer');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser("Romantic"));
+//Private Key to assign the cookie.
+app.use(session());
+//app.use(session({ secret: process.env.PASSPORT_SECRET }));
 app.use(express.static(__dirname + '/public/client'));
+require("./public/server/app.js")(app);
+
+
+
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 app.listen(port, ipaddress);

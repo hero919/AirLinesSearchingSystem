@@ -19,6 +19,7 @@
             <!--Didn't know how to make form-control also in one line. Submit button also has some problem-->
             <form class="form-horizontal">
                 <h1 style="color: white">My Profile</h1>
+                <div ng-show="message" class="alert alert-success" role="alert">{{message}} </div>
                 <div class="form-group">
                     <label for="username" style="color: white">Username</label>
                     <input ng-model="username" id="username" type="text" class="form-control" placeholder="username">
@@ -34,7 +35,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="lastName" style="color: white">FirstName</label>
+                    <label for="lastName" style="color: white">LastName</label>
                     <input ng-model="lastName" id="lastName" type="text" class="form-control" placeholder="lastName">
                 </div>
 

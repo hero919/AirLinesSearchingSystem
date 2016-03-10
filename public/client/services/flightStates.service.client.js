@@ -18,8 +18,6 @@
 
             var deferred = $q.defer();
 
-
-
             var departureAirport = flight.from;
             var arrivalAirport = flight.to;
             var year = flight.year;

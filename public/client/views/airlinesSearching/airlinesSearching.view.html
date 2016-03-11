@@ -258,7 +258,7 @@
 
                                 <p>{{"Flight Carrier Name: "+ airline.name}}</p>
 
-                                <p>{{"Phone Number: "+ airline.phoneNumber}}</p>
+                                <p>Contact Flight Carrier: <a href="tel:{{airline.phoneNumber}}">{{airline.phoneNumber}}</a></p>
 
                                 <p>{{"Estimate Flight Durations: " +
                                     flightDetails.flightStatus.flightDurations.scheduledBlockMinutes + " mins"}}</p>

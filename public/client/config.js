@@ -22,7 +22,10 @@
             when('/profile', {
                 templateUrl: 'views/profile/profile.view.html',
                 controller: 'ProfileController',
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: checkLoggedIn
+                }
 
             }).
 
@@ -41,7 +44,10 @@
             when('/favoriteAirlines', {
                 templateUrl: 'views/favoriteAirlines/favoriteAirlines.view.html',
                 controller: 'favoriteAirlinesController',
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: checkLoggedIn
+                }
 
             }).
             when('/form-fields', {
@@ -85,7 +91,7 @@
                     deferred.resolve();
                 } else {
                     deferred.reject();
-                    $location.url("/home");
+                    $location.url("/mainpage");
                 }
             });
 

@@ -125,7 +125,7 @@
 
                     <div class="form-group">
                         <div>
-                            <label for="month">Month(0-12)</label>
+                            <label for="month">Month(1-12)</label>
                         </div>
                         <input ng-model="flight.month" id="month" class="form-control"
                                style="width: 200px; margin-right: 10px" placeholder="Month">
@@ -201,7 +201,7 @@
                     </button>
 
 
-                    <button ng-click="like(flight)" type="button" class="btn btn-warning pull-right">
+                    <button ng-show="currentUser" ng-click="like(flight)" type="button" class="btn btn-warning pull-right">
                         <span class="glyphicon glyphicon-star-empty"></span>
                     </button>
 

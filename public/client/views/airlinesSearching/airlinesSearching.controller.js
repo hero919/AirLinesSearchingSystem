@@ -10,12 +10,13 @@
 
     //UserService, $rootScope, $location,$scope
 
-    function airlinesSearchingController($scope, flightStatesService){
+    function airlinesSearchingController($scope, flightStatesService, $rootScope){
 
         $scope.findDetails = findDetails;
         $scope.search = search;
         $scope.like = like;
         $scope.calculateAirportOrder = calculateAirportOrder;
+        $scope.currentUser = $rootScope.currentUser;
 
 
 

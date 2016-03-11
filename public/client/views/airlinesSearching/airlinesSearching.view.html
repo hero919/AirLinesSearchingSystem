@@ -1,4 +1,3 @@
-
 <style>
     @media (min-width: 550px) {
         .searching {
@@ -9,40 +8,57 @@
 
         }
     }
+
     @media (max-width: 550px) {
-        .searching{
+        .searching {
             padding-top: 50px;
             padding-left: 100px;
             /*padding-right: 100px;*/
             color: white;
 
+        }
 
+        .flightButton{
+            margin-bottom: 20px;
         }
 
     }
 
-    .firstLine{
+    .firstLine {
         padding-top: 30px;
     }
-    .secondLine{
+
+    .secondLine {
         padding-top: 20px;
     }
 
-    .maxFlights{
+    .maxFlights {
         padding-top: 30px;
     }
-    .searchButton{
+
+    .searchButton {
         padding-top: 100px;
     }
 
-    .searchContainer{
-        background-color: rgba(0, 0, 0, 0.5);
+    .searchContainer {
+        background-color: rgba(0, 0, 0, 0.4);
         padding-left: 40px;
         padding-top: 40px;
         padding-bottom: 40px;
     }
 
-    .backgroundImage{
+    .flightButton {
+        background-color: rgba(0, 0, 0, 0.4);
+        width: 150px;
+        margin-right: 30px;
+    }
+
+    .hotelButton {
+        background-color: rgba(0, 0, 0, 0.4);
+        width: 150px;
+    }
+
+    .backgroundImage {
         background-image: url("../../img/searching.jpg");
         padding-bottom: 50px;
 
@@ -51,73 +67,98 @@
 <div ng-controller="airlinesSearchingController" class="searchingAll">
 
     <div class="backgroundImage">
-    <div class="searching">
-     <div class="form searchContainer">
-        <div>
-            <h1>Seaching Flight</h1>
-        </div>
-         <div ng-show="message" class="alert alert-success" role="alert">{{message}} </div>
-
-
-         <div class="form-inline firstLine" role="form">
-            <div class="form-group">
+        <div class="searching">
+            <div class="form searchContainer">
                 <div>
-                <label for="flyFrom">Flying from</label>
+                    <h1>Seaching Flight</h1>
                 </div>
-                <input  ng-model="flight.from" id="flyFrom" class="form-control" style="width: 300px; margin-right: 20px" placeholder="Airport">
+                <ul class="nav nav-pills">
+                    <li role="presentation" class="active">
+                        <button type="button" class="btn flightButton">
+                     <span>
+                         <i class="fa fa-plane fa-3x"></i>
+                         <p>Flight</p>
+                     </span>
+                        </button>
+                    </li>
+                    <li role="presentation">
+                    <button type="button" class="btn hotelButton">
+                     <span>
+                         <i class="fa fa-building fa-3x"></i>
+                         <p>Hotel</p>
+                     </span>
+                    </button>
+                    </li>
 
+                </ul>
+
+                <div ng-show="message" class="alert alert-success" role="alert">{{message}}</div>
+
+
+                <div class="form-inline firstLine" role="form">
+                    <div class="form-group">
+                        <div>
+                            <label for="flyFrom">Flying from</label>
+                        </div>
+                        <input ng-model="flight.from" id="flyFrom" class="form-control"
+                               style="width: 300px; margin-right: 20px" placeholder="Airport">
+
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label for="flyTo">Flying to</label>
+                        </div>
+                        <input ng-model="flight.to" id="flyTo" class="form-control" style="width: 300px;"
+                               placeholder="Airport">
+                    </div>
+                </div>
+
+                <div class="form-inline secondLine" role="form">
+                    <div class="form-group">
+                        <div>
+                            <label for="year">Year(4 digits)</label>
+                        </div>
+                        <input ng-model="flight.year" id="year" class="form-control"
+                               style="width: 200px; margin-right: 10px" placeholder="Year">
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label for="month">Month(0-12)</label>
+                        </div>
+                        <input ng-model="flight.month" id="month" class="form-control"
+                               style="width: 200px; margin-right: 10px" placeholder="Month">
+                    </div>
+
+                    <div class="form-group">
+                        <div>
+                            <label for="day">Day</label>
+                        </div>
+                        <input ng-model="flight.day" id="day" class="form-control" style="width: 200px;"
+                               placeholder="Day">
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="maxFlights">
+                        <label for="maxFlights">MaxFlights</label>
+                    </div>
+                    <input ng-model="flight.maxFlights" id="maxFlights" class="form-control" style="width: 200px;"
+                           placeholder="MaxFlights">
+
+
+                </div>
+
+
+                <div class="searchButton">
+                    <button ng-click="search(flight)" type="submit" class="btn btn-default">Search</button>
+                </div>
             </div>
 
-            <div class="form-group">
-                <div>
-                <label for="flyTo">Flying to</label>
-                </div>
-                <input ng-model="flight.to" id="flyTo" class="form-control" style="width: 300px;" placeholder="Airport">
-            </div>
-        </div>
-
-        <div class="form-inline secondLine" role="form">
-            <div class="form-group">
-                <div>
-                    <label for="year">Year(4 digits)</label>
-                </div>
-                <input ng-model="flight.year" id="year" class="form-control" style="width: 200px; margin-right: 10px" placeholder="Year">
-            </div>
-
-            <div class="form-group">
-                <div>
-                    <label for="month">Month(0-12)</label>
-                </div>
-                <input ng-model="flight.month" id="month" class="form-control" style="width: 200px; margin-right: 10px" placeholder="Month">
-            </div>
-
-            <div class="form-group">
-                <div>
-                    <label for="day">Day</label>
-                </div>
-                <input ng-model="flight.day" id="day" class="form-control" style="width: 200px;" placeholder="Day">
-            </div>
-        </div>
-
-
-         <div>
-             <div class="maxFlights">
-                 <label for="maxFlights">MaxFlights</label>
-             </div>
-             <input ng-model="flight.maxFlights" id="maxFlights" class="form-control" style="width: 200px;" placeholder="MaxFlights">
-
-
-         </div>
-
-
-
-        <div class="searchButton">
-            <button ng-click="search(flight)" type="submit" class="btn btn-default">Search</button>
         </div>
     </div>
-
-    </div>
-</div>
 
     <div ng-if="flights.flightStatuses.length != 0">
         <h3>Search Results</h3>
@@ -131,7 +172,7 @@
                 <th>&nbsp;</th>
             </tr>
             </thead>
-            <tbody>
+            <>
             <tr ng-repeat="flight in flights">
 
                 <td>
@@ -143,11 +184,11 @@
 
                 <td>
                     {{flight.operationalTimes.publishedDeparture.dateLocal.substring(0,10)+
-                    "  " + flight.operationalTimes.publishedDeparture.dateLocal.substring(11,19)}}
+                    " " + flight.operationalTimes.publishedDeparture.dateLocal.substring(11,19)}}
                 </td>
                 <td>
                     {{flight.operationalTimes.publishedArrival.dateLocal.substring(0,10)+
-                    "  "+ flight.operationalTimes.publishedArrival.dateLocal.substring(11,19)}}
+                    " "+ flight.operationalTimes.publishedArrival.dateLocal.substring(11,19)}}
                 </td>
 
 
@@ -166,9 +207,9 @@
 
                 </td>
                 <!--<td>-->
-                    <!--<a href="#/details/{{movie.imdbID}}">-->
-                        <!--{{movie.Title}}-->
-                    <!--</a>-->
+                <!--<a href="#/details/{{movie.imdbID}}">-->
+                <!--{{movie.Title}}-->
+                <!--</a>-->
                 <!--</td>-->
                 <!--<td>{{movie.imdbID}}</td>-->
                 <div class="modal fade" id="sample" role="dialog">
@@ -178,79 +219,96 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h2 class="modal-title">{{flightDetails.flightStatus.carrierFsCode +" " + flightDetails.flightStatus.flightNumber}} </h2>
-                                <h3>{{flightDetails.flightStatus.departureAirportFsCode + " -> " + flightDetails.flightStatus.arrivalAirportFsCode}}</h3>
+                                <h2 class="modal-title">{{flightDetails.flightStatus.carrierFsCode +" " +
+                                    flightDetails.flightStatus.flightNumber}} </h2>
+
+                                <h3>{{flightDetails.flightStatus.departureAirportFsCode + " -> " +
+                                    flightDetails.flightStatus.arrivalAirportFsCode}}</h3>
                                 <!--<h3> {{flight.operationalTimes.publishedDeparture.dateLocal.substring(0,10)+-->
-                                    <!--"  " + flight.operationalTimes.publishedDeparture.dateLocal.substring(11,19) +-->
-                                    <!--" -> " + flight.operationalTimes.publishedArrival.dateLocal.substring(0,10)+-->
-                                    <!--"  "+ flight.operationalTimes.publishedArrival.dateLocal.substring(11,19)}}</h3>-->
-                                <h3>{{flightDetails.flightStatus.operationalTimes.publishedDeparture.dateLocal.substring(0,10)
-                                    + " " + flightDetails.flightStatus.operationalTimes.publishedDeparture.dateLocal.substring(11,19)
-                                    +" -> "  + flightDetails.flightStatus.operationalTimes.publishedArrival.dateLocal.substring(0,10)
-                                    + " " + flightDetails.flightStatus.operationalTimes.publishedArrival.dateLocal.substring(11,19)
+                                <!--"  " + flight.operationalTimes.publishedDeparture.dateLocal.substring(11,19) +-->
+                                <!--" -> " + flight.operationalTimes.publishedArrival.dateLocal.substring(0,10)+-->
+                                <!--"  "+ flight.operationalTimes.publishedArrival.dateLocal.substring(11,19)}}</h3>-->
+                                <h3>
+                                    {{flightDetails.flightStatus.operationalTimes.publishedDeparture.dateLocal.substring(0,10)
+                                    + " " +
+                                    flightDetails.flightStatus.operationalTimes.publishedDeparture.dateLocal.substring(11,19)
+                                    +" -> " +
+                                    flightDetails.flightStatus.operationalTimes.publishedArrival.dateLocal.substring(0,10)
+                                    + " " +
+                                    flightDetails.flightStatus.operationalTimes.publishedArrival.dateLocal.substring(11,19)
                                     + "(Local Time)"
                                     }}</h3>
 
                             </div>
                             <div class="modal-body">
-                                <p>{{"DepartureTerminal: " + flightDetails.flightStatus.airportResources.departureTerminal}}</p>
+                                <p>{{"DepartureTerminal: " +
+                                    flightDetails.flightStatus.airportResources.departureTerminal}}</p>
+
                                 <p>{{"Departure Airport: " + flightDetails.appendix.airports[from].name+ ", "
                                     + flightDetails.appendix.airports[from].city + ", "
                                     + flightDetails.appendix.airports[from].stateCode}}</p>
 
-                                <p>{{"ArrivalTerminal: " + flightDetails.flightStatus.airportResources.arrivalTerminal}}</p>
+                                <p>{{"ArrivalTerminal: " +
+                                    flightDetails.flightStatus.airportResources.arrivalTerminal}}</p>
+
                                 <p>{{"Arrival Airport: " + flightDetails.appendix.airports[to].name+ ", "
                                     + flightDetails.appendix.airports[to].city + ", "
                                     + flightDetails.appendix.airports[to].stateCode}}</p>
 
 
                                 <p>{{"Flight Carrier Name: "+ airline.name}}</p>
+
                                 <p>{{"Phone Number: "+ airline.phoneNumber}}</p>
-                                <p>{{"Estimate Flight Durations: " + flightDetails.flightStatus.flightDurations.scheduledBlockMinutes + " mins"}}</p>
+
+                                <p>{{"Estimate Flight Durations: " +
+                                    flightDetails.flightStatus.flightDurations.scheduledBlockMinutes + " mins"}}</p>
 
                                 <p>{{"Flight: "+ flightDetails.appendix.equipments[0].name}}</p>
+
                                 <div>
                                     <!--<style>-->
-                                        <!--#map {-->
-                                            <!--width: 350px;-->
-                                            <!--height: 350px;-->
-                                        <!--}-->
+                                    <!--#map {-->
+                                    <!--width: 350px;-->
+                                    <!--height: 350px;-->
+                                    <!--}-->
                                     <!--</style>-->
 
                                     <!--<div id="map" class="col-xs-12 col-sm-6 col-lg-6">-->
 
-                                        <!--<script>-->
+                                    <!--<script>-->
 
 
-                                            <!--function initMap() {-->
-                                                <!--var flightLocation = {lat: 42.434166, lng: -71.074469};-->
+                                    <!--function initMap() {-->
+                                    <!--var flightLocation = {lat: 42.434166, lng: -71.074469};-->
 
-                                                <!--var map = new google.maps.Map(document.getElementById('map'), {-->
-                                                    <!--zoom: 20,-->
-                                                    <!--center: flightLocation-->
-                                                <!--});-->
+                                    <!--var map = new google.maps.Map(document.getElementById('map'), {-->
+                                    <!--zoom: 20,-->
+                                    <!--center: flightLocation-->
+                                    <!--});-->
 
-                                                <!--var marker = new google.maps.Marker({-->
-                                                    <!--position: flightLocation,-->
-                                                    <!--map: map,-->
-                                                    <!--title: 'The Flight is here now.'-->
-                                                <!--});-->
-                                            <!--}-->
+                                    <!--var marker = new google.maps.Marker({-->
+                                    <!--position: flightLocation,-->
+                                    <!--map: map,-->
+                                    <!--title: 'The Flight is here now.'-->
+                                    <!--});-->
+                                    <!--}-->
 
-                                        <!--</script>-->
-                                        <!--<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"-->
-                                                <!--async defer></script>-->
-                                <!--</div>-->
+                                    <!--</script>-->
+                                    <!--<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"-->
+                                    <!--async defer></script>-->
+                                    <!--</div>-->
 
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
+
                         </div>
-
                     </div>
                 </div>
             </tr>
+
             </tbody>
         </table>
 
@@ -258,21 +316,7 @@
         <!-- Modal -->
 
 
-
-
-
-
-
-
-
-
-
     </div>
-
-
-
-
-
 
 
 </div>

@@ -7,12 +7,43 @@
         .factory("flightStatesService", flightStatesService);
 
     function flightStatesService($http,$q) {
+        var appId = "2cb99f9b";
+        var appKey = "e76c96dd3b766b615229c03c38872bf3";
         var api = {
-            searchFlightByAirport: searchFlightByAirport
+            searchFlightByAirport: searchFlightByAirport,
+            searchFlightById: searchFlightById
             //searchMovieByTitle: searchMovieByTitle,
             //findMovieByImdbID: findMovieByImdbID
         };
         return api;
+
+
+
+        function searchFlightById(flightId){
+
+            var deferred = $q.defer();
+            var URL = "https://api.flightstats.com/flex/flightstatus/rest/v2/jsonp/flight/status/" +
+                flightId +
+                "?appId=" +
+                appId +
+                "&appKey=" +
+                appKey + "&&callback=JSON_CALLBACK";
+
+            console.log("The URL is ");
+            console.log(URL);
+            $http.jsonp(URL)
+                .success(function(response){
+                    console.log(response);
+                    deferred.resolve(response);
+                });
+
+            return deferred.promise;
+
+        }
+
+
+
+
 
         function searchFlightByAirport(flight) {
 
@@ -24,8 +55,8 @@
             var month = flight.month;
             var day = flight.day;
             var maxFlights = flight.maxFlights;
-            var appId = "2cb99f9b";
-            var appKey = "e76c96dd3b766b615229c03c38872bf3&hourOf";
+            //var appId = "2cb99f9b";
+            //var appKey = "e76c96dd3b766b615229c03c38872bf3&hourOf";
 
             var URL = "https://api.flightstats.com/flex/flightstatus/rest/v2/jsonp/route/status/" +
                         departureAirport +

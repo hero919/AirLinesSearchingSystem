@@ -142,20 +142,20 @@
                 </td>
 
                 <td>
-                    {{flight.operationalTimes.publishedDeparture.dateLocal}}
+                    {{flight.operationalTimes.publishedDeparture.dateLocal.substring(0,10)+
+                    "  " + flight.operationalTimes.publishedDeparture.dateLocal.substring(11,19)}}
                 </td>
                 <td>
-                    {{flight.operationalTimes.publishedArrival.dateLocal}}
+                    {{flight.operationalTimes.publishedArrival.dateLocal.substring(0,10)+
+                    "  "+ flight.operationalTimes.publishedArrival.dateLocal.substring(11,19)}}
                 </td>
 
 
                 <td>
 
-                    <button type="button" class="btn btn-danger pull-right">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
 
-                    <button ng-click="location.href='#/details/{{flight.flightId}}';" type="button" class="btn btn-info pull-right">
+                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#sample"
+                            ng-click="findDetails(flight.flightId)">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
 
@@ -171,9 +171,102 @@
                     <!--</a>-->
                 <!--</td>-->
                 <!--<td>{{movie.imdbID}}</td>-->
+                <div class="modal fade" id="sample" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h2 class="modal-title">{{flightDetails.flightStatus.carrierFsCode +" " + flightDetails.flightStatus.flightNumber}} </h2>
+                                <h3>{{flightDetails.flightStatus.departureAirportFsCode + " -> " + flightDetails.flightStatus.arrivalAirportFsCode}}</h3>
+                                <!--<h3> {{flight.operationalTimes.publishedDeparture.dateLocal.substring(0,10)+-->
+                                    <!--"  " + flight.operationalTimes.publishedDeparture.dateLocal.substring(11,19) +-->
+                                    <!--" -> " + flight.operationalTimes.publishedArrival.dateLocal.substring(0,10)+-->
+                                    <!--"  "+ flight.operationalTimes.publishedArrival.dateLocal.substring(11,19)}}</h3>-->
+                                <h3>{{flightDetails.flightStatus.operationalTimes.publishedDeparture.dateLocal.substring(0,10)
+                                    + " " + flightDetails.flightStatus.operationalTimes.publishedDeparture.dateLocal.substring(11,19)
+                                    +" -> "  + flightDetails.flightStatus.operationalTimes.publishedArrival.dateLocal.substring(0,10)
+                                    + " " + flightDetails.flightStatus.operationalTimes.publishedArrival.dateLocal.substring(11,19)
+                                    + "(Local Time)"
+                                    }}</h3>
+
+                            </div>
+                            <div class="modal-body">
+                                <p>{{"DepartureTerminal: " + flightDetails.flightStatus.airportResources.departureTerminal}}</p>
+                                <p>{{"Departure Airport: " + flightDetails.appendix.airports[from].name+ ", "
+                                    + flightDetails.appendix.airports[from].city + ", "
+                                    + flightDetails.appendix.airports[from].stateCode}}</p>
+
+                                <p>{{"ArrivalTerminal: " + flightDetails.flightStatus.airportResources.arrivalTerminal}}</p>
+                                <p>{{"Arrival Airport: " + flightDetails.appendix.airports[to].name+ ", "
+                                    + flightDetails.appendix.airports[to].city + ", "
+                                    + flightDetails.appendix.airports[to].stateCode}}</p>
+
+
+                                <p>{{"Flight Carrier Name: "+ airline.name}}</p>
+                                <p>{{"Phone Number: "+ airline.phoneNumber}}</p>
+                                <p>{{"Estimate Flight Durations: " + flightDetails.flightStatus.flightDurations.scheduledBlockMinutes + " mins"}}</p>
+
+                                <p>{{"Flight: "+ flightDetails.appendix.equipments[0].name}}</p>
+                                <div>
+                                    <!--<style>-->
+                                        <!--#map {-->
+                                            <!--width: 350px;-->
+                                            <!--height: 350px;-->
+                                        <!--}-->
+                                    <!--</style>-->
+
+                                    <!--<div id="map" class="col-xs-12 col-sm-6 col-lg-6">-->
+
+                                        <!--<script>-->
+
+
+                                            <!--function initMap() {-->
+                                                <!--var flightLocation = {lat: 42.434166, lng: -71.074469};-->
+
+                                                <!--var map = new google.maps.Map(document.getElementById('map'), {-->
+                                                    <!--zoom: 20,-->
+                                                    <!--center: flightLocation-->
+                                                <!--});-->
+
+                                                <!--var marker = new google.maps.Marker({-->
+                                                    <!--position: flightLocation,-->
+                                                    <!--map: map,-->
+                                                    <!--title: 'The Flight is here now.'-->
+                                                <!--});-->
+                                            <!--}-->
+
+                                        <!--</script>-->
+                                        <!--<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"-->
+                                                <!--async defer></script>-->
+                                <!--</div>-->
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </tr>
             </tbody>
         </table>
+
+
+        <!-- Modal -->
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
 

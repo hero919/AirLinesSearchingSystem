@@ -63,6 +63,23 @@
         padding-bottom: 50px;
 
     }
+    hr.style01{
+        padding: 0;
+        border: none;
+        border-top: medium double #333;
+        color: #333;
+        text-align: center;
+    }
+
+    hr.style01:after{
+        content: "§";
+        display: inline-block;
+        position: relative;
+        top: -0.7em;
+        font-size: 1.5em;
+        padding: 0 0.25em;
+        background: white;
+    }
 </style>
 <div class="searchingAll">
 
@@ -175,50 +192,55 @@
 <!--<p>{{findHotels}}</p>-->
 <div ng-if="findHotels">
     <h3>Start your favorite hotels!</h3>
+
     <div ng-repeat="hotel in findHotels">
-        <div class="col-xs-12 col-sm-8">
-            <div>
-                <h2>{{hotel.property_name}}</h2>
-            </div>
-            <!--这里偷懒了!!!!!!!!!!-->
-            <div>
-                <h4>{{hotel.contacts[0].detail}}</h4>
-            </div>
+        <div class="container row">
+            <div class="col-xs-12 col-sm-8">
+                <div>
+                    <h2>{{hotel.property_name}}</h2>
+                </div>
+                <!--这里偷懒了!!!!!!!!!!-->
+                <div>
+                    <h4>{{hotel.contacts[0].detail}}</h4>
+                </div>
 
-            <div>
-                <h4>{{"Total Price is: "+ hotel.total_price.amount
-                    + " "+ hotel.total_price.currency}}</h4>
-            </div>
-            <div>
-                <h4>{{hotel.address.line1 + ", "+ hotel.address.city + " ,"
-                    + hotel.address.region}}</h4>
-            </div>
-            <!--<div>-->
+                <div>
+                    <h4>{{"Total Price is: "+ hotel.total_price.amount
+                        + " "+ hotel.total_price.currency}}</h4>
+                </div>
+                <div>
+                    <h4>{{hotel.address.line1 + ", "+ hotel.address.city + " ,"
+                        + hotel.address.region}}</h4>
+                </div>
+                <!--<div>-->
                 <!--<h4>{{"Min daily rate is "+ hotel.min_daily_rate.bufferedAmount+ " ,"-->
-                    <!--+ hotel.min_daily_rate.currency}}</h4>-->
-            <!--</div>-->
-            <!--<div>-->
+                <!--+ hotel.min_daily_rate.currency}}</h4>-->
+                <!--</div>-->
+                <!--<div>-->
                 <!--<h4>-->
-                    <!--{{"Room Type Info: "+ hotel.room_type_info.room_type}}-->
+                <!--{{"Room Type Info: "+ hotel.room_type_info.room_type}}-->
                 <!--</h4>-->
-            <!--</div>-->
+                <!--</div>-->
 
 
-        </div>
+            </div>
 
-        <div class="col-xs-12 col-sm-4">
-            <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#sample"
-                    ng-click="">
-                <span class="glyphicon glyphicon-search"></span>
-            </button>
+            <div class="col-xs-12 col-sm-4">
+                <button type="button" class="btn btn-info pull-right btn-lg" data-toggle="modal" data-target="#sample"
+                        ng-click="">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
 
 
-            <button ng-show="currentUser" ng-click="" type="button" class="btn btn-warning pull-right">
-                <span class="glyphicon glyphicon-star-empty"></span>
-            </button>
+                <button ng-show="currentUser" ng-click="" type="button" class="btn btn-warning pull-right btn-lg">
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                </button>
 
             </div>
         </div>
+        <hr class="style01"/>
+
+    </div>
 
 
 
@@ -230,6 +252,7 @@
 
         <!-- Modal content-->
         <div class="modal-content">
+            <p>Test</p>
         </div>
     </div>
 </div>

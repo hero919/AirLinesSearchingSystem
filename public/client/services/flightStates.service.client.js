@@ -6,20 +6,53 @@
         .module("airlines")
         .factory("flightStatesService", flightStatesService);
 
-    function flightStatesService($http,$q) {
+    function flightStatesService($http, $q) {
         var appId = "2cb99f9b";
         var appKey = "e76c96dd3b766b615229c03c38872bf3";
         var api = {
             searchFlightByAirport: searchFlightByAirport,
-            searchFlightById: searchFlightById
+            searchFlightById: searchFlightById,
+            searchHotelByLocation: searchHotelByLocation
             //searchMovieByTitle: searchMovieByTitle,
             //findMovieByImdbID: findMovieByImdbID
         };
         return api;
 
 
+        function searchHotelByLocation(hotel) {
 
-        function searchFlightById(flightId){
+            var convert = "http://json2jsonp.com/?url=";
+            var deferred = $q.defer();
+            var apiKey = "yHpnDMZo7eixGRwzE5hitP9KhxMFU8zb";
+            var location = hotel.location;
+            var checkInDate = hotel.checkIn;
+            var checkOutDate = hotel.checkOut;
+            var radius = hotel.radius;
+            var maxHotels = hotel.maxHotels;
+            var URL = "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport?apikey=" +
+                apiKey +
+                "&location=" +
+                location +
+                "&check_in=" +
+                checkInDate +
+                "&check_out=" +
+                checkOutDate +
+                "&radius=" +
+                radius +
+                "&number_of_results=" +
+                maxHotels;
+
+            console.log(URL);
+            return $http.get(URL);
+            //    .success(function (response) {
+            //        //console.log(response);
+            //        deferred.resolve(response);
+            //    });
+            //
+            //return deferred.promise;
+        }
+
+        function searchFlightById(flightId) {
 
             var deferred = $q.defer();
             var URL = "https://api.flightstats.com/flex/flightstatus/rest/v2/jsonp/flight/status/" +
@@ -32,7 +65,7 @@
             console.log("The URL is ");
             console.log(URL);
             $http.jsonp(URL)
-                .success(function(response){
+                .success(function (response) {
                     console.log(response);
                     deferred.resolve(response);
                 });
@@ -40,9 +73,6 @@
             return deferred.promise;
 
         }
-
-
-
 
 
         function searchFlightByAirport(flight) {
@@ -59,28 +89,26 @@
             //var appKey = "e76c96dd3b766b615229c03c38872bf3&hourOf";
 
             var URL = "https://api.flightstats.com/flex/flightstatus/rest/v2/jsonp/route/status/" +
-                        departureAirport +
-            "/" + arrivalAirport +
-            "/dep" +
-            "/" + year +
-            "/" + month +
-            "/" + day +
-            "?appId=" +
-            appId +
-            "&appKey=" +
-            appKey +
-            "&hourOfDay=0&utc=false&numHours=24&" +
-            "maxFlights=" + maxFlights+"&&callback=JSON_CALLBACK";
-
+                departureAirport +
+                "/" + arrivalAirport +
+                "/dep" +
+                "/" + year +
+                "/" + month +
+                "/" + day +
+                "?appId=" +
+                appId +
+                "&appKey=" +
+                appKey +
+                "&hourOfDay=0&utc=false&numHours=24&" +
+                "maxFlights=" + maxFlights + "&&callback=JSON_CALLBACK";
 
 
             $http.jsonp(URL)
-                .success(function(response){
+                .success(function (response) {
                     deferred.resolve(response);
                 });
 
             return deferred.promise;
-
 
 
             //$.ajax({
@@ -100,8 +128,6 @@
             //
             //
             //return result;
-
-
 
 
             //return $http

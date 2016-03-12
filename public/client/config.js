@@ -50,8 +50,15 @@
                 }
 
             }).
-            when('/form-fields', {
-                templateUrl: 'views/form/form-fields.view.html'
+            when('/flightSearch', {
+                templateUrl: 'views/airlinesSearching/airlinesSearching.view.html',
+                controller: "airlinesSearchingController"
+               // controllerAs:"model"
+            }).
+            when('/hotelSearch', {
+                templateUrl: 'views/hotelsSearching/hotelsSearching.view.html',
+                controller: "hotelsSearchingController"
+                //controllerAs:"model"
             }).
 
             otherwise({

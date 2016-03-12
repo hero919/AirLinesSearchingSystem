@@ -17,6 +17,7 @@
         $scope.like = like;
         $scope.calculateAirportOrder = calculateAirportOrder;
         $scope.currentUser = $rootScope.currentUser;
+       // $scope.flights = null;
 
 
 

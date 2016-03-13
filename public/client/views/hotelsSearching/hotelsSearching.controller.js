@@ -9,10 +9,25 @@
 
 
     function hotelsSearchingController($scope, flightStatesService){
-        $scope.hello = "hello World";
+        //$scope.hello = "hello World";
         $scope.searchHotels = searchHotels;
+        $scope.getHotelDetails = getHotelDetails;
        // $scope.findHotels = "asd";
 
+
+        function getHotelDetails(hotel){
+            $scope.hotelName = hotel.property_name;
+            $scope.hotel = hotel;
+            //偷懒了
+            $scope.descriptionArray = hotel.rooms[0].descriptions;
+            $scope.marketing_text = hotel.marketing_text;
+            $scope.room_type_info = hotel.rooms[0].room_type_info;
+            $scope.awardArray = hotel.awards;
+
+
+
+
+        }
 
 
 
@@ -42,14 +57,12 @@
             flightStatesService.searchHotelByLocation(hotel).then(function(response){
                 console.log(response.data.results);
                 $scope.findHotels = response.data.results;
-                //if(response.results.length==0){
-                //    $scope.message = "error";
-                //
-                //}else{
-                //    $scope.message = "Successfully search " + response.results.length + " results for you";
-                //
-                //}
+                if(response.data.results.length==0){
+                    $scope.message = "Please enter the valid check in or check out date";
 
+                }else{
+                    $scope.message = "Successfully search " + response.data.results.length + " results for you";
+                }
             });
 
         }

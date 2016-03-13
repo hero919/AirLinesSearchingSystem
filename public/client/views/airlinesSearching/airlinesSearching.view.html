@@ -184,11 +184,11 @@
 
                 <td>
                     {{flight.operationalTimes.publishedDeparture.dateLocal.substring(0,10)+
-                    " " + flight.operationalTimes.publishedDeparture.dateLocal.substring(11,19)}}
+                    " " + flight.operationalTimes.publishedDeparture.dateLocal.substring(11,16)}}
                 </td>
                 <td>
                     {{flight.operationalTimes.publishedArrival.dateLocal.substring(0,10)+
-                    " "+ flight.operationalTimes.publishedArrival.dateLocal.substring(11,19)}}
+                    " "+ flight.operationalTimes.publishedArrival.dateLocal.substring(11,16)}}
                 </td>
 
 
@@ -231,39 +231,51 @@
                                 <h3>
                                     {{flightDetails.flightStatus.operationalTimes.publishedDeparture.dateLocal.substring(0,10)
                                     + " " +
-                                    flightDetails.flightStatus.operationalTimes.publishedDeparture.dateLocal.substring(11,19)
+                                    flightDetails.flightStatus.operationalTimes.publishedDeparture.dateLocal.substring(11,16)
                                     +" -> " +
                                     flightDetails.flightStatus.operationalTimes.publishedArrival.dateLocal.substring(0,10)
                                     + " " +
-                                    flightDetails.flightStatus.operationalTimes.publishedArrival.dateLocal.substring(11,19)
+                                    flightDetails.flightStatus.operationalTimes.publishedArrival.dateLocal.substring(11,16)
                                     + "(Local Time)"
                                     }}</h3>
 
                             </div>
                             <div class="modal-body">
-                                <p>{{"DepartureTerminal: " +
-                                    flightDetails.flightStatus.airportResources.departureTerminal}}</p>
-
                                 <p>{{"Departure Airport: " + flightDetails.appendix.airports[from].name+ ", "
                                     + flightDetails.appendix.airports[from].city + ", "
                                     + flightDetails.appendix.airports[from].stateCode}}</p>
+                                <p>{{"DepartureTerminal: " +
+                                    flightDetails.flightStatus.airportResources.departureTerminal}}</p>
+                                <p ng-if="flightDetails.flightStatus.airportResources.departureGate">
+                                    {{"DepartureGate: " +
+                                    flightDetails.flightStatus.airportResources.departureGate}}</p>
 
-                                <p>{{"ArrivalTerminal: " +
-                                    flightDetails.flightStatus.airportResources.arrivalTerminal}}</p>
+
 
                                 <p>{{"Arrival Airport: " + flightDetails.appendix.airports[to].name+ ", "
                                     + flightDetails.appendix.airports[to].city + ", "
                                     + flightDetails.appendix.airports[to].stateCode}}</p>
 
 
+                                <p>{{"ArrivalTerminal: " +
+                                    flightDetails.flightStatus.airportResources.arrivalTerminal}}</p>
+
+
+                                <p ng-if="flightDetails.flightStatus.airportResources.arrivalGate">
+                                    {{"ArrivalGate: " +
+                                    flightDetails.flightStatus.airportResources.arrivalGate}}</p>
+
+
+
+
                                 <p>{{"Flight Carrier Name: "+ airline.name}}</p>
 
-                                <p>Contact Flight Carrier: <a href="tel:{{airline.phoneNumber}}">{{airline.phoneNumber}}</a></p>
+                                <p ng-if="airline.phoneNumber">Contact Flight Carrier: <a href="tel:{{airline.phoneNumber}}">{{airline.phoneNumber}}</a></p>
 
                                 <p>{{"Estimate Flight Durations: " +
                                     flightDetails.flightStatus.flightDurations.scheduledBlockMinutes + " mins"}}</p>
 
-                                <p>{{"Flight: "+ flightDetails.appendix.equipments[0].name}}</p>
+                                <p ng-if="airline.phoneNumber">{{"Flight: "+ flightDetails.appendix.equipments[0].name}}</p>
 
                                 <div>
                                     <!--<style>-->

@@ -63,7 +63,8 @@
         padding-bottom: 50px;
 
     }
-    hr.style01{
+
+    hr.style01 {
         padding: 0;
         border: none;
         border-top: medium double #333;
@@ -71,7 +72,7 @@
         text-align: center;
     }
 
-    hr.style01:after{
+    hr.style01:after {
         content: "§";
         display: inline-block;
         position: relative;
@@ -79,6 +80,11 @@
         font-size: 1.5em;
         padding: 0 0.25em;
         background: white;
+    }
+
+    #map {
+        width: 350px;
+        height: 350px;
     }
 </style>
 <div class="searchingAll">
@@ -194,8 +200,8 @@
     <h3>Start your favorite hotels!</h3>
 
     <div ng-repeat="hotel in findHotels">
-        <div class="container row">
-            <div class="col-xs-12 col-sm-8">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
                 <div>
                     <h2>{{hotel.property_name}}</h2>
                 </div>
@@ -222,12 +228,10 @@
                 <!--</h4>-->
                 <!--</div>-->
 
-
             </div>
-
-            <div class="col-xs-12 col-sm-4">
+            <div class="col-xs-12 col-sm-2">
                 <button type="button" class="btn btn-info pull-right btn-lg" data-toggle="modal" data-target="#sample"
-                        ng-click="">
+                        ng-click="getHotelDetails(hotel)">
                     <span class="glyphicon glyphicon-search"></span>
                 </button>
 
@@ -243,16 +247,76 @@
     </div>
 
 
-
 </div>
+
+
 
 <!--<td>{{movie.imdbID}}</td>-->
 <div class="modal fade" id="sample" role="dialog">
     <div class="modal-dialog modal-lg">
 
-        <!-- Modal content-->
         <div class="modal-content">
-            <p>Test</p>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h1 class="modal-title">{{hotelName}}</h1>
+            </div>
+            <div class="modal-body">
+                <!--<div class="row">-->
+                <div>
+                    <div>
+                        <h3>{{hotel.contacts[0].detail}}</h3>
+                    </div>
+                    <div>
+                        <h3>
+                            {{hotel.address.line1 + ", "+ hotel.address.city + " ,"
+                            + hotel.address.region}}
+                        </h3>
+                    </div>
+                    <div ng-if="marketing_text">
+                        <h4>{{"Why choose " + hotelName + ":"}}</h4>
+                    </div>
+                    <div ng-if="marketing_text">
+                        {{marketing_text}}
+                    </div>
+                    <div ng-if="room_type_info.number_of_beds">
+                        <p>{{"Number of Bed:  "+ room_type_info.number_of_beds}}</p>
+                    </div>
+                    <div ng-if="room_type_info.bed_type">
+                        <p>{{"Bed Type: "+ room_type_info.bed_type}}</p>
+                    </div>
+                    <div ng-if="room_type_info.room_type">
+                        <p>{{"Room Type: "+ room_type_info.room_type}}</p>
+                    </div>
+
+
+                    <div>
+                        <h3>The descriptions about the room:</h3>
+                    </div>
+                    <ul ng-repeat="desciption in descriptionArray">
+                        <li>{{desciption}}</li>
+                    </ul>
+
+
+                    <div ng-repeat="award in awardArray" style="background-color: #eb9316">
+                        <p>{{"Award Provider: "+ award.provider}}</p>
+                        <br/>
+                        <p>{{"Rating: " + award.rating}}</p>
+                    </div>
+                    <div>
+                        <h3>
+                            {{"Total Price Will Be: "+ hotel.total_price.amount
+                            + " "+ hotel.total_price.currency}}
+                        </h3>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
+
+        <!-- Modal content-->
+
     </div>
 </div>

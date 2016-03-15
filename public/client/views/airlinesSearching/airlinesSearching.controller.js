@@ -66,6 +66,7 @@
                     //console.log(response);
                     //console.log("asdasdasdasasd");
                     //console.log(findAirlines(response, response.flightStatus.carrierFsCode));
+                    var airlinesSharing = "";
                     $scope.airline = findAirlines(response, response.flightStatus.carrierFsCode);
                     $scope.flightDetails = response;
                     //console.log("mmmmmmmm"+response.flightStatus.departureAirportFsCode);
@@ -74,6 +75,15 @@
 
                     $scope.from = calculateAirportOrder(response, response.flightStatus.departureAirportFsCode);
                     $scope.to = calculateAirportOrder(response, response.flightStatus.arrivalAirportFsCode);
+
+                    for(var line in response.appendix.airlines){
+                        airlinesSharing=  airlinesSharing.concat(response.appendix.airlines[line].name).concat("/ ");
+
+                    }
+                    airlinesSharing = airlinesSharing.substring(0,airlinesSharing.length-2);
+                    $scope.airlinesSharing = airlinesSharing;
+
+
                 }
             )
 

@@ -146,7 +146,7 @@
                         <label for="maxFlights">MaxFlights</label>
                     </div>
                     <input ng-model="flight.maxFlights" id="maxFlights" class="form-control" style="width: 200px;"
-                           placeholder="MaxHotels">
+                           placeholder="MaxFlights">
 
 
                 </div>
@@ -241,6 +241,8 @@
 
                             </div>
                             <div class="modal-body">
+
+                                <!--Little problem needs to be fixed here. The stateCode may no be accurate.-->
                                 <p>{{"Departure Airport: " + flightDetails.appendix.airports[from].name+ ", "
                                     + flightDetails.appendix.airports[from].city + ", "
                                     + flightDetails.appendix.airports[from].stateCode}}</p>
@@ -275,7 +277,9 @@
                                 <p>{{"Estimate Flight Durations: " +
                                     flightDetails.flightStatus.flightDurations.scheduledBlockMinutes + " mins"}}</p>
 
-                                <p ng-if="airline.phoneNumber">{{"Flight: "+ flightDetails.appendix.equipments[0].name}}</p>
+                                <p ng-if="flightDetails.appendix.equipments[0].name">{{"Flight: "+ flightDetails.appendix.equipments[0].name}}</p>
+
+                                <p ng-if="flightDetails.appendix.airlines.length > 1">{{"Airlines Sharing: " + airlinesSharing}}</p>
 
                                 <div>
                                     <!--<style>-->

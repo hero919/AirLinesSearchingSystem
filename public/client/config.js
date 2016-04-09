@@ -48,14 +48,49 @@
                 resolve: {
                     getLoggedIn: checkLoggedIn
                 }
+            }).
+
+            //#/api/project/airlines/{{airline._id}}/details
+
+            when('/api/project/airlines/:flightId/details', {
+                templateUrl: 'views/favoriteAirlines/favoriteAirlines.view.html',
+                controller: 'favoriteAirlinesController',
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: checkLoggedIn
+                }
 
             }).
+
+            when('/api/project/hotels/:hotelId/:checkInDate/:checkOutDate/details', {
+                templateUrl: 'views/favoriteAirlines/favoriteAirlines.view.html',
+                controller: 'favoriteAirlinesController',
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: checkLoggedIn
+                }
+
+            }).
+
+
+
+
             when('/flightSearch', {
                 templateUrl: 'views/airlinesSearching/airlinesSearching.view.html',
                 controller: "airlinesSearchingController"
-               // controllerAs:"model"
+                // controllerAs:"model"
+            }).
+            when('/flightSearch/from/:flyFrom/to/:flyTo/:year/:month/:day/maxFlight/:maxFlight', {
+                templateUrl: 'views/airlinesSearching/airlinesSearching.view.html',
+                controller: "airlinesSearchingController"
+                // controllerAs:"model"
             }).
             when('/hotelSearch', {
+                templateUrl: 'views/hotelsSearching/hotelsSearching.view.html',
+                controller: "hotelsSearchingController"
+                //controllerAs:"model"
+            }).
+            when('/hotelSearch/location/:location/checkInDate/:checkInDate/checkOutDate/:checkOutDate/radius/:radius/maxHotels/:maxHotels', {
                 templateUrl: 'views/hotelsSearching/hotelsSearching.view.html',
                 controller: "hotelsSearchingController"
                 //controllerAs:"model"

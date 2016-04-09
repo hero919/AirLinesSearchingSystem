@@ -25,8 +25,6 @@
         function updateUser(userId, user){
             var deferred = $q.defer();
             $http.put('/api/project/airlines/user/'+ userId,user).success(function(response){
-                //console.log("The user "+ userId + " is updating the profile.");
-                //console.log("0123456The user is: "+ user);
                 deferred.resolve(response);
             });
             return deferred.promise;
@@ -41,16 +39,8 @@
         }
 
         function register(user) {
-            //console.log("bgfgffgh");
-            //console.log($http.post("/api/project/airlines/register", user));
-            var deferred = $q.defer();
-           $http.post("/api/project/airlines/register", user).success(
-               function(response){
-                   deferred.resolve(response);
-               }
-           );
-            //return $http.post("/api/project/airlines/register", user);
-            return deferred.promise;
+          return $http.post("/api/project/airlines/register", user);
+
         }
 
         function logout() {

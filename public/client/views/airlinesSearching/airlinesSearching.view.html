@@ -114,13 +114,14 @@
                     </div>
                 </div>
 
+
                 <div class="form-inline secondLine" role="form">
                     <div class="form-group">
                         <div>
                             <label for="year">Year(4 digits)</label>
                         </div>
                         <input ng-model="flight.year" id="year" class="form-control"
-                               style="width: 200px; margin-right: 10px" placeholder="Year">
+                               style="width: 200px; margin-right: 10px" type="text" placeholder="Year">
                     </div>
 
                     <div class="form-group">
@@ -140,7 +141,6 @@
                     </div>
                 </div>
 
-
                 <div>
                     <div class="maxFlights">
                         <label for="maxFlights">MaxFlights</label>
@@ -150,6 +150,8 @@
 
 
                 </div>
+
+
 
 
                 <div class="searchButton">
@@ -201,9 +203,19 @@
                     </button>
 
 
-                    <button ng-show="currentUser" ng-click="like(flight)" type="button" class="btn btn-warning pull-right">
+                    <button ng-show="currentUser&&(userLikeFlightIds.indexOf(flight.flightId.toString())==-1)" ng-click="like(flight)" type="button" class="btn btn-warning pull-right">
                         <span class="glyphicon glyphicon-star-empty"></span>
                     </button>
+
+
+                    <button ng-show="currentUser&&(userLikeFlightIds.indexOf(flight.flightId.toString())!=-1)"  ng-click="cancelLikeFlight(flight.flightId)" type="button" class="btn btn-warning pull-right">
+                        <span class="glyphicon glyphicon-star"></span>
+                    </button>
+                    <!--<h1 ng-if="currentUser">-->
+                        <!--{{flight.flightId}}-->
+                        <!--{{userLikeFlightIds.indexOf(flight.flightId.toString())}}-->
+                        <!--&lt;!&ndash;{{checkFavorite(flight.flightId)}}&ndash;&gt;-->
+                    <!--</h1>-->
 
                 </td>
                 <!--<td>-->

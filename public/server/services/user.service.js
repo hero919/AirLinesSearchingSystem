@@ -2,40 +2,33 @@
  * Created by zeqingzhang on 3/9/16.
  */
 
-module.exports = function(app, userModel, flightModel){
+module.exports = function(app, userModel){
 
     app.post("/api/project/airlines/login", login);
     app.get("/api/project/airlines/loggedin", loggedin);
     app.post("/api/project/airlines/logout", logout);
     app.post("/api/project/airlines/register", register);
-    //app.get("/api/project/airlines/profile/:userId", profile);
-    //
-    //function profile(req, res) {
-    //    var userId = req.params.userId;
-    //    var user = userModel.findUserById(userId);
-    //    var movieImdbIDs = user.likes;
-    //    var movies = movieModel.findMoviesByImdbIDs(movieImdbIDs);
-    //    user.likesMovies = movies;
-    //    res.json(user);
-    //}
+
 
     function register(req, res) {
         var user = req.body;
-        user = userModel.createUser(user);
-        req.session.currentUser = user;
-        console.log("asdasdsad");
-        console.log(user);
-        res.json(user);
+        userModel.createUser(user).then(function(response){
+            req.session.currentUser = response;
+            res.json(response);
+        });
+
+
+
     }
 
     function login(req, res) {
-
         var credentials = req.body;
-        console.log("The server side credential is: "+ credentials);
-        var user = userModel.findUserByCredentials(credentials);
-        console.log("The server side user is: "+ user);
-        req.session.currentUser = user;
-        res.json(user);
+       //return userModel.findUserByCredentials(credentials);
+        userModel.findUserByCredentials(credentials).then(function(findUser){
+            req.session.currentUser = findUser;
+            res.json(findUser);
+        });
+
     }
 
     function loggedin(req, res) {
@@ -48,15 +41,11 @@ module.exports = function(app, userModel, flightModel){
     }
 
 
-//'/api/project/airlines/user/'
 
     app.put('/api/project/airlines/user/:id', function(req,res){
-        //model.Update(req.params.id, req.body).then(function(user) {
-        //    res.json(user);
-        //});
-
-        console.log("The request body is "+ req.body);
-        res.json(userModel.Update(req.params.id, req.body));
+        userModel.Update(req.params.id, req.body).then(function(updatedUser){
+            res.json(updatedUser);
+        })
     });
 
 

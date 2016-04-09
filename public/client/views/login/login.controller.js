@@ -29,10 +29,11 @@
                     password: user.password
                 })
                 .then(function(response){
+
                     console.log(response);
-                    //response.data
-                    if(response!=null) {
+                    if(response !==null) {
                         console.log("successful");
+                        console.log(response);
                         UserService.setCurrentUser(response);
                         $location.url("/profile");
                     }else{

@@ -5,7 +5,8 @@
     "lastName": "Wonderland",
     "username": "alice",
     "password": "alice",
-    "email":"alice@yahoo.com"
+    "email":"alice@yahoo.com",
+    "role": "admin"
   },
   {
     "_id": 234,
@@ -13,6 +14,7 @@
     "lastName": "Marlin",
     "username": "bob",
     "password": "bob",
-    "email":"bob@husky.neu.edu"
+    "email":"bob@husky.neu.edu",
+    "role": "regular"
   }
 ]

@@ -12,17 +12,55 @@
         var api = {
             searchFlightByAirport: searchFlightByAirport,
             searchFlightById: searchFlightById,
-            searchHotelByLocation: searchHotelByLocation
-            //searchMovieByTitle: searchMovieByTitle,
-            //findMovieByImdbID: findMovieByImdbID
+            getAirportInfo :  getAirportInfo,
+            searchHotelByLocation: searchHotelByLocation,
+            searchHotelByIdAndDate : searchHotelByIdAndDate
         };
         return api;
 
 
+
+
+        function getAirportInfo(IATACode){
+            var deferred = $q.defer();
+            var URL = "https://api.flightstats.com/flex/airports/rest/v1/jsonp/iata/" +
+                IATACode +
+                "?appId=" +
+                appId +
+                "&" +
+                "appKey=" +
+                appKey +
+                "&&callback=JSON_CALLBACK";
+            console.log(URL);
+            $http.jsonp(URL)
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
+        }
+
+
+
+        function searchHotelByIdAndDate(hotelId, checkIndate, checkOutDate){
+            var apiKey = "yHpnDMZo7eixGRwzE5hitP9KhxMFU8zb";
+            var URL = "https://api.sandbox.amadeus.com/v1.2/hotels/" +
+                hotelId +
+                "?apikey=" +
+                apiKey +
+                "&check_in=" +
+                checkIndate +
+                "&check_out=" +
+                checkOutDate;
+
+            return $http.get(URL);
+
+        }
+
+
+
+
         function searchHotelByLocation(hotel) {
 
-            var convert = "http://json2jsonp.com/?url=";
-            var deferred = $q.defer();
             var apiKey = "yHpnDMZo7eixGRwzE5hitP9KhxMFU8zb";
             var location = hotel.location;
             var checkInDate = hotel.checkIn;
@@ -53,7 +91,6 @@
         }
 
         function searchFlightById(flightId) {
-
             var deferred = $q.defer();
             var URL = "https://api.flightstats.com/flex/flightstatus/rest/v2/jsonp/flight/status/" +
                 flightId +

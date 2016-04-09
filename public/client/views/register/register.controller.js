@@ -13,17 +13,27 @@
 
 
         function register(user) {
-            console.log(user);
-            UserService
-                .register(user)
-                .then(function(response){
-                    var currentUser = response;
-                    if(currentUser != null) {
-                        console.log(currentUser);
-                        UserService.setCurrentUser(currentUser);
-                        $location.url("/profile");
-                    }
-                });
+            if (user.password != user.verifiedPassword) {
+                $scope.message = "Password not match!";
+            } else {
+                console.log(user);
+                UserService
+                    .register(user)
+                    .then(function (response) {
+                        console.log(response);
+                        if (response.data) {
+                            var currentUser = response;
+                            console.log(currentUser);
+                            if (currentUser != null) {
+                                console.log(currentUser);
+                                UserService.setCurrentUser(currentUser.data);
+                                $location.url("/profile");
+                            }
+                        } else {
+                            $scope.message = "The username has already used by others. Please use another username.";
+                        }
+                    });
+            }
         }
     }
 

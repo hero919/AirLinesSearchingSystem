@@ -10,21 +10,85 @@
 
     //UserService, $rootScope, $location,$scope
 
-    function airlinesSearchingController($scope, flightStatesService, $rootScope){
+    function airlinesSearchingController($scope, flightStatesService, tripService,$rootScope,$location,$routeParams){
+
 
         $scope.findDetails = findDetails;
         $scope.search = search;
         $scope.like = like;
+        $scope.cancelLikeFlight = cancelLikeFlight;
         $scope.calculateAirportOrder = calculateAirportOrder;
         $scope.currentUser = $rootScope.currentUser;
-       // $scope.flights = null;
+       // $scope.checkFavorite = checkFavorite;
+
+        function getAllUserLikes(){
+            tripService.findUserLikeFlights().then(
+                function(flights){
+                    //console.log(flights);
+                    var userLikeFlightsArray = [];
+                    for(var i in flights.data){
+                       userLikeFlightsArray.push(flights.data[i].flightId);
+                    }
+                    //console.log(userLikeFlightsArray);
+                    $scope.userLikeFlightIds = userLikeFlightsArray;
+                }
+            )
+        }
+        if($rootScope.currentUser) {
+            getAllUserLikes();
+        }
+
+        //function checkFavorite(flightId){
+        //    var finalResult = null;
+        //     tripService.checkFavoriteFlight(flightId).then(function(result){
+        //        // console.log(result);
+        //         finalResult = result.data;
+        //     });
+        //
+        //    return finalResult;
+        //
+        //}
 
 
+        function init() {
+            if ($routeParams.flyFrom != null) {
+                var flight = {
+                    from: $routeParams.flyFrom,
+                    to: $routeParams.flyTo,
+                    year: $routeParams.year,
+                    month: $routeParams.month,
+                    day: $routeParams.day,
+                    maxFlights: $routeParams.maxFlight
+                };
 
 
+                flightStatesService.searchFlightByAirport(flight).then(function (response) {
+                    //console.log(response);
+                    $scope.flights = response.flightStatuses;
+                    // fromAirportInfo = response.appendix.airports[calculateAirportOrder(response,flight.from)];
+                    // toAirportInfo = response.appendix.airports[calculateAirportOrder(response,flight.to)];
+
+                    if (response.flightStatuses.length == 0) {
+                        $scope.message = response.error.errorMessage;
+
+                    } else {
+                        $scope.message = "Successfully search " + response.flightStatuses.length + " results for you";
+
+                    }
+
+                })
 
 
+            }
+        }
+        init();
 
+
+        function cancelLikeFlight(flightId){
+            tripService.cancelLikeFlight(flightId);
+            getAllUserLikes();
+
+        }
 
 
 
@@ -37,9 +101,7 @@
             }
             return "Can not find the corresponding carrier."
 
-        }
-
-
+        };
 
 
 
@@ -55,24 +117,13 @@
         }
 
 
-
-
-
         function findDetails(flightId){
             console.log(flightId);
             flightStatesService.searchFlightById(flightId).then(
                 function(response){
-                    //console.log("abc");
-                    //console.log(response);
-                    //console.log("asdasdasdasasd");
-                    //console.log(findAirlines(response, response.flightStatus.carrierFsCode));
                     var airlinesSharing = "";
                     $scope.airline = findAirlines(response, response.flightStatus.carrierFsCode);
                     $scope.flightDetails = response;
-                    //console.log("mmmmmmmm"+response.flightStatus.departureAirportFsCode);
-                    //console.log(calculateAirportOrder(response, response.flightStatus.departureAirportFsCode));
-                    //console.log(calculateAirportOrder(response, response.flightStatus.arrivalAirportFsCode));
-
                     $scope.from = calculateAirportOrder(response, response.flightStatus.departureAirportFsCode);
                     $scope.to = calculateAirportOrder(response, response.flightStatus.arrivalAirportFsCode);
 
@@ -97,91 +148,36 @@
 
 
 
-        function like(){
-
-
-
-
-
-
+        function like(flight){
+           tripService.userLikeFlight(flight);
+            getAllUserLikes();
 
         }
-
-
-
-
-        //$(function() {
-        //    $( ".autocomplete" ).autocomplete({
-        //        source: function( request, response ) {
-        //            $.ajax({
-        //                url: "//www.air-port-codes.com/search/",
-        //                jsonp: "callback",
-        //                dataType: "jsonp",
-        //                data: {
-        //                    term: request.term, // input field value
-        //                    limit: 7, // default is 30
-        //                    size: 3, // default is 0
-        //                    key: "[API-KEY-HERE]" // dont forget to add your API Key from your air-port-codes.com account
-        //                },
-        //                success: function( data ) {
-        //                    if (data.status) { // success
-        //                        response( $.map( data.airports, function( item ) {
-        //                            return {
-        //                                label: item.name + ' (' + item.iata + ')',
-        //                                value: item.name + ' (' + item.iata + ')',
-        //                                code: item.iata
-        //                            }
-        //                        }));
-        //                    } else { // no results
-        //                        response();
-        //                    }
-        //                }
-        //            });
-        //        },
-        //        select: function( event, ui ) {
-        //            // do something for click event
-        //            console.log(ui.item.code);
-        //        }
-        //    });
-        //});
-
-
 
 
 
         function search(flight){
-
-            flightStatesService.searchFlightByAirport(flight).then(function(response){
-                console.log(response);
-                $scope.flights = response.flightStatuses;
-
-                if(response.flightStatuses.length==0){
-                    $scope.message = response.error.errorMessage;
-
-                }else{
-                    $scope.message = "Successfully search " + response.flightStatuses.length + " results for you";
-
-                }
-
-
-            })
+            var from = flight.from;
+            var to = flight.to;
+            var year = flight.year;
+            var month = flight.month;
+            var day = flight.day;
+            var maxFlights = flight.maxFlights;
+            //Return the flight which just adding to the database
+            $location.url('/flightSearch/from/' +
+                from +
+                '/to/' +
+                to +
+                '/' +
+                year +
+                '/' +
+                month +
+                '/' +
+                day +
+                '/maxFlight/' +
+                maxFlights);
+            //console.log("Search");
         }
-
-        //$scope.login =
-        //    function(){
-        //        UserService.findUserByUsernameAndPassword($scope.username, $scope.password, function(user){
-        //            if(user !== null) {
-        //                console.log("logged in");
-        //                $rootScope.user = user;
-        //                $location.url('/profile');
-        //            }else{
-        //                console.log("Can't find the user");
-        //
-        //            }
-        //        })
-        //    }
-
-
 
     }
 

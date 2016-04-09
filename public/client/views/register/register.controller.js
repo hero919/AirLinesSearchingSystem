@@ -13,6 +13,8 @@
 
 
         function register(user) {
+            console.log(user.password);
+            console.log(user.verifiedPassword);
             if (user.password != user.verifiedPassword) {
                 $scope.message = "Password not match!";
             } else {

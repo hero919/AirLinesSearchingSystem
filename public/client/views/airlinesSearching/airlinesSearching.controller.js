@@ -119,7 +119,7 @@
 
 
         function findDetails(flightId){
-            console.log(flightId);
+            //console.log(flightId);
             flightStatesService.searchFlightById(flightId).then(
                 function(response){
                     var airlinesSharing = "";

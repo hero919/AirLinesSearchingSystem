@@ -34,26 +34,26 @@ module.exports = function(mongoose, db) {
         var deferred = q.defer();
         userModel.find({username: updatedUser.username}, function (err, doc) {
             if (err) {
-                console.log(err);
+                //console.log(err);
                 deferred.reject(err);
             } else {
-                console.log("Update");
+                //console.log("Update");
                     userModel
                         .update(
                         {_id: mongoose.Types.ObjectId(id)},
                         {$set: updatedUser},
                         function (err, stats) {
                             if (!err) {
-                                console.log("Not Error");
-                                console.log(userModel.findById({
-                                    _id: id
-                                }));
+                                //console.log("Not Error");
+                                //console.log(userModel.findById({
+                                //    _id: id
+                                //}));
                                 deferred.resolve(userModel.findById({
                                     _id: id
                                 }));
 
                             } else {
-                                console.log(err);
+                                //console.log(err);
                                 deferred.reject(err);
                             }
                         }
@@ -110,7 +110,7 @@ module.exports = function(mongoose, db) {
            if(err){
                deferred.reject(err);
            }else{
-               console.log(doc.length);
+               //console.log(doc.length);
                if(doc.length ==0){
                    userModel.create(user, function (err, doc) {
                        if (err) {

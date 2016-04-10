@@ -18,7 +18,7 @@
         init();
 
         function login(user) {
-            console.log(user);
+            //console.log(user);
             if(!user) {
                 return;
             }
@@ -30,10 +30,10 @@
                 })
                 .then(function(response){
 
-                    console.log(response);
+                    //console.log(response);
                     if(response !==null) {
-                        console.log("successful");
-                        console.log(response);
+                        //console.log("successful");
+                        //console.log(response);
                         UserService.setCurrentUser(response);
                         $location.url("/profile");
                     }else{

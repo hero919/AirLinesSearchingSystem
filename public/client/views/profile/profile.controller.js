@@ -13,7 +13,7 @@
 
         function init() {
            UserService.getCurrentUser().then(function(response){
-               console.log(response);
+              // console.log(response);
            });
             $scope.username = $rootScope.currentUser.username;
             $scope.password = $rootScope.currentUser.password;
@@ -42,10 +42,10 @@
                     "company" : $scope.company
                 };
                 UserService.updateUser($rootScope.currentUser._id, updatedUser).then(function (newUser) {
-                    console.log("User has already updated! ");
-                    console.log(newUser);
+                   // console.log("User has already updated! ");
+                   // console.log(newUser);
                     UserService.setCurrentUser(newUser);
-                    console.log($rootScope.currentUser);
+                   // console.log($rootScope.currentUser);
                         if (newUser) {
                             $scope.message = 'User has already updated!';
                         } else {

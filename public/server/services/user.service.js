@@ -8,7 +8,14 @@ module.exports = function(app, userModel){
     app.get("/api/project/airlines/loggedin", loggedin);
     app.post("/api/project/airlines/logout", logout);
     app.post("/api/project/airlines/register", register);
+    app.put("/api/project/airlines/setCurrentUser", setCurrentUser);
 
+
+    function setCurrentUser(req,res){
+        req.session.currentUser = req.body;
+        res.json(req.session.currentUser);
+
+    }
 
     function register(req, res) {
         var user = req.body;

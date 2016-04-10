@@ -91,8 +91,8 @@ module.exports = function(app, userModel, flightModel, hotelModel,contactModel){
         var checkOutDate = req.params.checkOutDate;
         hotelModel.checkFavoriteHotel(userId, hotelId,checkInDate,checkOutDate).then(
             function(hotel){
-                console.log("The response of checkFavorite is: ");
-                console.log(hotel);
+               // console.log("The response of checkFavorite is: ");
+               // console.log(hotel);
                 if(hotel == null){
                     res.json(false);
                 }else {
@@ -185,7 +185,7 @@ module.exports = function(app, userModel, flightModel, hotelModel,contactModel){
     function getUserLikeFlights(req, res){
         //console.log("CALL GETUSERLIKEFLIGHTS FUNCTION");
         var userId = req.params.userId;
-        console.log(flightModel.findFlightsByUserId(userId));
+        //console.log(flightModel.findFlightsByUserId(userId));
         flightModel.findFlightsByUserId(userId).then(
             function(flights){
                 res.json(flights);

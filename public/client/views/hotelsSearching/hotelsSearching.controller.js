@@ -31,7 +31,7 @@
                 $scope.SearchHotel = hotel;
                 //console.log(flightStatesService.searchHotelByLocation(hotel).value);
                 flightStatesService.searchHotelByLocation(hotel).then(function(response){
-                    console.log(response.data.results);
+                    //console.log(response.data.results);
                     $scope.findHotels = response.data.results;
                     if(response.data.results.length==0){
                         $scope.message = "Please enter the valid check in or check out date";

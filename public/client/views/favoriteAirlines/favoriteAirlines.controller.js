@@ -57,7 +57,7 @@
                 center: {lat: 41.85, lng: -87.65}
             });
             directionsDisplay.setMap(map);
-            console.log("Hello Gap");
+            //console.log("Hello Gap");
             calculateAndDisplayRoute(directionsService, directionsDisplay);
 //        var onChangeHandler = function() {
 //            calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -67,18 +67,18 @@
         }
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             //console.log(document.getElementById('start').value);
-            console.log("HotelInfo");
-            console.log(hotelLocationLatitude);
-            console.log(hotelLocationLongitude);
-            console.log("FlightInfo");
-            console.log(airportLatitude);
-            console.log(airportLongitude);
+            //console.log("HotelInfo");
+            //console.log(hotelLocationLatitude);
+            //console.log(hotelLocationLongitude);
+            //console.log("FlightInfo");
+            //console.log(airportLatitude);
+            //console.log(airportLongitude);
             directionsService.route({
                 origin: new google.maps.LatLng(hotelLocationLatitude, hotelLocationLongitude),
                 destination: new google.maps.LatLng(airportLatitude, airportLongitude),
                 travelMode: google.maps.TravelMode.DRIVING
             }, function(response, status) {
-                console.log(response);
+                //console.log(response);
                 if (status === google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
                 } else {
@@ -127,7 +127,7 @@
             tripService.cancelLikeHotel(hotelId,checkInDate,checkOutDate);
             tripService.checkFavoriteHotel(hotelId,checkInDate,checkOutDate).then(
                 function(response){
-                    console.log(response.data);
+                    //console.log(response.data);
                     if(!response.data){
                         $location.url("/favoriteAirlines");
                     }
@@ -167,7 +167,7 @@
             if($routeParams.flightId) {
                 flightStatesService.searchFlightById($routeParams.flightId).then(
                     function(flightDetails){
-                        console.log(flightDetails);
+                        //console.log(flightDetails);
                         $scope.flightDetails = flightDetails;
                        if(flightDetails.flightStatus.departureAirportFsCode==flightDetails.appendix.airports[0].fs){
                            $scope.departureAirportInfo = flightDetails.appendix.airports[0];
@@ -208,8 +208,8 @@
                     airportLatitude = response.airports[0].latitude;
                     airportLongitude = response.airports[0].longitude;
                     airportLocation = new google.maps.LatLng(airportLatitude, airportLongitude);
-                    console.log("LLLLLL");
-                    console.log(airportLongitude);
+                    //console.log("LLLLLL");
+                    //console.log(airportLongitude);
 
                 });
 
@@ -218,7 +218,7 @@
                         hotelLocation = new google.maps.LatLng(hotelDetails.data.location.latitude, hotelDetails.data.location.longitude);
                         hotelLocationLatitude = hotelDetails.data.location.latitude;
                         hotelLocationLongitude = hotelDetails.data.location.longitude;
-                        console.log(hotelDetails);
+                        //console.log(hotelDetails);
                         $scope.hotelDetails = hotelDetails;
                         $scope.amenities = hotelDetails.data.amenities;
 

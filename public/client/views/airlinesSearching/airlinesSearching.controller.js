@@ -146,12 +146,9 @@
 
 
 
-
-
         function like(flight){
            tripService.userLikeFlight(flight);
             getAllUserLikes();
-
         }
 
 

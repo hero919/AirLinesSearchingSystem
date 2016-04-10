@@ -13,21 +13,21 @@
 
 
         function register(user) {
-            console.log(user.password);
-            console.log(user.verifiedPassword);
+            //console.log(user.password);
+            //console.log(user.verifiedPassword);
             if (user.password != user.verifiedPassword) {
                 $scope.message = "Password not match!";
             } else {
-                console.log(user);
+                //console.log(user);
                 UserService
                     .register(user)
                     .then(function (response) {
-                        console.log(response);
+                        //console.log(response);
                         if (response.data) {
                             var currentUser = response;
-                            console.log(currentUser);
+                            //console.log(currentUser);
                             if (currentUser != null) {
-                                console.log(currentUser);
+                                //console.log(currentUser);
                                 UserService.setCurrentUser(currentUser.data);
                                 $location.url("/profile");
                             }

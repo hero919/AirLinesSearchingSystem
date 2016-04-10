@@ -17,6 +17,10 @@
         margin-top: 25px;
     }
 
+    .reminder{
+        margin-right: 40px;
+    }
+
 </style>
 
 <!--<div ng-controller="ProfileController" class="row main">-->
@@ -67,6 +71,13 @@
 <div class="main">
 <div class="container">
     <div class="backgroundContainer">
+        <div class="alert alert-warning reminder">
+            <a class="panel-close close" data-dismiss="alert">×</a>
+            <i class="fa fa-exclamation-triangle"></i>
+            Important Reminder : If you are using a remote version, the edit functionality may not work due
+            to the conflict versions of MongoDB. Once you register with the account, all the information may not
+            change. Sorry about this issue.
+        </div>
     <h1 style="color: lightyellow" class="page-header">Edit Profile</h1>
     <div class="row">
         <!--&lt;!&ndash; left column &ndash;&gt;-->

@@ -11,8 +11,9 @@
         console.log("Test02");
         $routeProvider.
             when('/mainpage', {
-                templateUrl: 'views/mainpage/mainpage.view.html'
-
+                templateUrl: 'views/mainpage/mainpage.view.html',
+                controller:"MainpageController",
+                controllerAs:"model"
             }).
             when('/login', {
                 templateUrl: 'views/login/login.view.html',

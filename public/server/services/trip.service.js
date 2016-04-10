@@ -1,10 +1,12 @@
 /**
  * Created by zeqingzhang on 3/9/16.
  */
-module.exports = function(app, userModel, flightModel, hotelModel){
+module.exports = function(app, userModel, flightModel, hotelModel,contactModel){
 
     var q = require("q");
 
+
+    app.post("/api/project/airlines/contact", addContact);
 
     app.get("/api/project/airlines/:userId/checkFlight/:flightId", checkFavoriteFlight);
 
@@ -39,6 +41,24 @@ module.exports = function(app, userModel, flightModel, hotelModel){
 
     //Find all the hotels this user like
     app.get("/api/project/airlines/:userId/hotels", getUserLikeHotels);
+
+
+
+
+    function addContact(req,res){
+        var form = req.body;
+        contactModel.addContactInfo(form).then(
+            function(doc){
+            res.json(doc)
+        },
+            function(err){
+                res.status(400).send(err);
+            }
+        )
+    }
+
+
+
 
 
     function checkFavoriteFlight(req,res){

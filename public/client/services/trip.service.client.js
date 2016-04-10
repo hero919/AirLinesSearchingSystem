@@ -18,7 +18,8 @@
             checkFavoriteHotel : checkFavoriteHotel,
             cancelLikeFlight : cancelLikeFlight,
             cancelLikeHotel : cancelLikeHotel,
-            getFavoriteFlightDetails : getFavoriteFlightDetails
+            getFavoriteFlightDetails : getFavoriteFlightDetails,
+            addContact : addContact
         };
 
 
@@ -28,6 +29,9 @@
         //Search from the flight database
 
 
+        function addContact(form){
+            return $http.post("/api/project/airlines/contact", form);
+        }
 
         function cancelLikeHotel(hotelId, checkInDate, checkOutDate){
             var userId = $rootScope.currentUser._id;

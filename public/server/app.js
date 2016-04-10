@@ -6,8 +6,9 @@ module.exports = function(app,mongoose, db){
     var UserModel = require('./models/user.model.js')(mongoose, db);
     var FlightModel = require('./models/flight.model.js')(mongoose, db);
     var HotelModel = require('./models/hotel.model.js')(mongoose,db);
+    var contactModel = require('./models/contact.model.js')(mongoose,db);
     require('./services/user.service.js')(app,UserModel);
-    require('./services/trip.service.js')(app,UserModel, FlightModel, HotelModel);
+    require('./services/trip.service.js')(app,UserModel, FlightModel, HotelModel,contactModel);
    // require('./services/flight.service.js')(app, UserModel, FlightModel);
 
 };

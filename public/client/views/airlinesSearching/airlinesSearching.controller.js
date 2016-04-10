@@ -62,6 +62,7 @@
                 };
 
 
+                $scope.flight = flight;
                 flightStatesService.searchFlightByAirport(flight).then(function (response) {
                     //console.log(response);
                     $scope.flights = response.flightStatuses;

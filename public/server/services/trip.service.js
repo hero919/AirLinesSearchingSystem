@@ -60,11 +60,11 @@ module.exports = function(app, userModel, flightModel, hotelModel,contactModel){
             email.addTo("zhang.ze@husky.neu.edu");
             email.setFrom("TripSearching");
             email.setSubject("Sending from Anonymous");
-            email.setHtml("<h1>The client Message is: "+ form.message + "<h2>The client Name is: " + form.name + "<h2>The client Phone Number is: " + form.phone + "<h2>The client Email is:" + form.email);
+            email.setHtml("<h1>The client Message is: "+ form.message + "<h2>The client Name is: " + form.name + "<h2>The client Phone Number is: " + form.phone + "<h2>The client Email is: " + form.email);
             sendgrid.send(email);
         }
 
-        
+
         contactModel.addContactInfo(form).then(
             function(doc){
             res.json(doc)

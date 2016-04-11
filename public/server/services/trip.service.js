@@ -4,6 +4,7 @@
 module.exports = function(app, userModel, flightModel, hotelModel,contactModel){
 
     var q = require("q");
+    var sendgrid = require("sendgrid")("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");
 
 
     app.post("/api/project/airlines/contact", addContact);
@@ -47,6 +48,23 @@ module.exports = function(app, userModel, flightModel, hotelModel,contactModel){
 
     function addContact(req,res){
         var form = req.body;
+        var email = new sendgrid.Email();
+        if(req.session.currentUser){
+            var currentUser = req.session.currentUser;
+            email.addTo("zhang.ze@husky.neu.edu");
+            email.setFrom("TripSearching");
+            email.setSubject("Sending from existing user: " + currentUser.username);
+            email.setHtml("<h1>The client Message is: "+ form.message + "<h2>The client Name is: " + form.name + "<h2>The client Phone Number is: " + form.phone + "<h2>The client Email is:" + form.email);
+            sendgrid.send(email);
+        }else{
+            email.addTo("zhang.ze@husky.neu.edu");
+            email.setFrom("TripSearching");
+            email.setSubject("Sending from Anonymous");
+            email.setHtml("<h1>The client Message is: "+ form.message + "<h2>The client Name is: " + form.name + "<h2>The client Phone Number is: " + form.phone + "<h2>The client Email is:" + form.email);
+            sendgrid.send(email);
+        }
+
+        
         contactModel.addContactInfo(form).then(
             function(doc){
             res.json(doc)

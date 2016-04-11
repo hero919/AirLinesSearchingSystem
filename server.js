@@ -193,7 +193,16 @@ app.use(session());
 //app.use(session({ secret: process.env.PASSPORT_SECRET }));
 app.use(express.static(__dirname + '/public/client'));
 require("./public/server/app.js")(app, mongoose, db);
-
+//var sendgrid = require("sendgrid")("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");
+////app.post('/api/project/airlines/contact');
+//var email = new sendgrid.Email();
+//
+//email.addTo("zhang.ze@husky.neu.edu");
+//email.setFrom("TripSearching");
+//email.setSubject("Sending with SendGrid is Fun");
+//email.setHtml("This is a test02");
+//
+//sendgrid.send(email);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;

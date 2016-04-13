@@ -7,8 +7,8 @@
         .factory("flightStatesService", flightStatesService);
 
     function flightStatesService($http, $q) {
-        var appId = "0e4ee6a1";
-        var appKey = "48839aed04276ba8ed3556159422686d";
+        var appId = "adc2df62";
+        var appKey = "f43cf99b1e69642002469ea4a948afee";
         var api = {
             searchFlightByAirport: searchFlightByAirport,
             searchFlightById: searchFlightById,

@@ -66,13 +66,13 @@
 //        document.getElementById('end').addEventListener('change', onChangeHandler);
         }
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-            //console.log(document.getElementById('start').value);
-            //console.log("HotelInfo");
-            //console.log(hotelLocationLatitude);
-            //console.log(hotelLocationLongitude);
-            //console.log("FlightInfo");
-            //console.log(airportLatitude);
-            //console.log(airportLongitude);
+           // console.log(document.getElementById('start').value);
+            console.log("HotelInfo");
+            console.log(hotelLocationLatitude);
+            console.log(hotelLocationLongitude);
+            console.log("FlightInfo");
+            console.log(airportLatitude);
+            console.log(airportLongitude);
             directionsService.route({
                 origin: new google.maps.LatLng(hotelLocationLatitude, hotelLocationLongitude),
                 destination: new google.maps.LatLng(airportLatitude, airportLongitude),

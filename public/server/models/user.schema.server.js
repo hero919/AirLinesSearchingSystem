@@ -12,7 +12,15 @@ module.exports = function(mongoose){
         lastName : String,
         company : String,
         role: String,
-        emails : String
+        emails : String,
+        google:   {
+            id:    String,
+            token: String
+        },
+        facebook:   {
+            id:    String,
+            token: String
+        }
     }, {
         collection : 'project.airlinessearchingsystem.userInfo'
     });

@@ -159,6 +159,7 @@
 //
 
 var express = require('express');
+var passport      = require('passport');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var app = express();
@@ -176,20 +177,25 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 
 var db = mongoose.connect(connectionString);
 
-
-
-
-
 //var multer = require('multer');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//app.use(cookieParser());
-//app.use(session({secret: 'Romantic'}));
 
-app.use(cookieParser("Romantic"));
-//Private Key to assign the cookie.
-app.use(session());
+
+//Start Using PassportJS
+app.use(session({
+    secret: 'this is the secret',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+
 //app.use(session({ secret: process.env.PASSPORT_SECRET }));
 app.use(express.static(__dirname + '/public/client'));
 require("./public/server/app.js")(app, mongoose, db);

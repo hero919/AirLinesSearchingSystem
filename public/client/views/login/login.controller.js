@@ -33,8 +33,8 @@
                     //console.log(response);
                     if(response !==null) {
                         //console.log("successful");
-                        //console.log(response);
-                        UserService.setCurrentUser(response);
+                        console.log(response);
+                        //UserService.setCurrentUser(response);
                         $location.url("/profile");
                     }else{
                         $scope.message = "The Username or Password is not correct";

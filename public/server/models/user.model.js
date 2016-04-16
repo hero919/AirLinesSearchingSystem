@@ -17,9 +17,18 @@ module.exports = function(mongoose, db) {
         createUser: createUser,
         findUserById: findUserById,
         findUsersByIds: findUsersByIds,
-        Update: Update
+        Update: Update,
+        findUserByFacebookId: findUserByFacebookId
     };
     return api;
+
+
+
+    function findUserByFacebookId(facebookId){
+        return userModel.findOne({'facebook.id': facebookId});
+    }
+
+
 
     function Update(id, updatedUser) {
         //for(var i = 0; i< mock.length; i++){
@@ -151,7 +160,6 @@ module.exports = function(mongoose, db) {
                 } else {
                     deferred.resolve(doc);
                 }
-
             });
 
         return deferred.promise;

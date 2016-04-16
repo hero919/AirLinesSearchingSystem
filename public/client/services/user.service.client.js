@@ -53,7 +53,7 @@
 
         function setCurrentUser(user) {
             $rootScope.currentUser = user;
-            return $http.put("/api/project/airlines/setCurrentUser",user);
+            //return $http.put("/api/project/airlines/setCurrentUser",user);
 
         }
 

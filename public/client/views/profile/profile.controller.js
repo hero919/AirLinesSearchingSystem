@@ -41,6 +41,7 @@
                     "emails": $scope.emails,
                     "company" : $scope.company
                 };
+
                 UserService.updateUser($rootScope.currentUser._id, updatedUser).then(function (newUser) {
                    // console.log("User has already updated! ");
                    // console.log(newUser);

@@ -10,7 +10,8 @@ module.exports = {
     'googleAuth' : {
         'clientID'        : "1060475494658-r67rnsg9hcdvuo2r0c6nhuojs74ube2v.apps.googleusercontent.com",
         'clientSecret'    : "_Ds3xftvFRlsgUQEnIwrEUMK",
-        'callbackURL'     : "http://127.0.0.1:3000/auth/google/callback"||"http://airlinessearchingsystem-zeqingzhang.rhcloud.com/auth/google/callback"
+        'callbackURL'     : "http://airlinessearchingsystem-zeqingzhang.rhcloud.com/auth/google/callback"
+        //"http://127.0.0.1:3000/auth/google/callback"
     },
     'flightStates' : {
 

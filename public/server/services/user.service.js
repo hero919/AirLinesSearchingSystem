@@ -8,16 +8,23 @@ module.exports = function(app, userModel){
     var auth = authorized;
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
+    var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
 
     var facebookConfig = {
-        clientID        : "995413833874499",
-        clientSecret    : "1df1486ed468e5790825a0436656258b",
+        clientID        : "1179261958765026",
+        clientSecret    : "c8016dee50452fc86ef9f76738f7a2da",
         callbackURL     : "http://localhost:3000/auth/facebook/callback"
     };
 
+    var googleConfig = {
+        clientID        : "1060475494658-r67rnsg9hcdvuo2r0c6nhuojs74ube2v.apps.googleusercontent.com",
+        clientSecret    : "_Ds3xftvFRlsgUQEnIwrEUMK",
+        callbackURL     : "http://127.0.0.1:3000/auth/google/callback"
+    };
 
 
+    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     app.post("/api/project/airlines/login", passport.authenticate('airlinesSearchingSystem'),login);
     app.get("/api/project/airlines/loggedin", loggedin);
@@ -26,6 +33,14 @@ module.exports = function(app, userModel){
     app.get   ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
+            successRedirect: '/#/profile',
+            failureRedirect: '/#/login'
+        }));
+
+
+    app.get   ('/auth/google',   passport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get   ('/auth/google/callback',
+        passport.authenticate('google', {
             successRedirect: '/#/profile',
             failureRedirect: '/#/login'
         }));
@@ -41,6 +56,8 @@ module.exports = function(app, userModel){
             .then(
             function(user) {
                 if(user) {
+                    console.log("User Already Exists");
+                    console.log(profile);
                     return done(null, user);
                 } else {
                     console.log(profile);
@@ -51,7 +68,7 @@ module.exports = function(app, userModel){
                         username: username,
                         firstName: names[0],
                         lastName:  names[names.length - 1],
-                        email:     email,
+                        emails:     email,
                         facebook: {
                             id:    profile.id,
                             token: token
@@ -74,6 +91,46 @@ module.exports = function(app, userModel){
         );
     }
 
+
+    function googleStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+            function(user) {
+               // console.log(user);
+                if(user) {
+                    console.log(profile);
+                    return done(null, user);
+                } else {
+                    console.log(profile);
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        username:  emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        emails:     email,
+                        google: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newGoogleUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+            .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
+    }
 
 
 

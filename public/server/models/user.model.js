@@ -18,7 +18,8 @@ module.exports = function(mongoose, db) {
         findUserById: findUserById,
         findUsersByIds: findUsersByIds,
         Update: Update,
-        findUserByFacebookId: findUserByFacebookId
+        findUserByFacebookId: findUserByFacebookId,
+        findUserByGoogleId : findUserByGoogleId
     };
     return api;
 
@@ -26,6 +27,10 @@ module.exports = function(mongoose, db) {
 
     function findUserByFacebookId(facebookId){
         return userModel.findOne({'facebook.id': facebookId});
+    }
+
+    function findUserByGoogleId(googleId){
+        return userModel.findOne({'google.id': googleId});
     }
 
 

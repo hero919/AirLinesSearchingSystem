@@ -4,6 +4,7 @@
 
 module.exports = function(app, userModel){
 
+    var configurationAuth = require('../models/DeveloperInfo.js');
     var passport      = require('passport');
     var auth = authorized;
     var LocalStrategy = require('passport-local').Strategy;
@@ -12,15 +13,15 @@ module.exports = function(app, userModel){
 
 
     var facebookConfig = {
-        clientID        : "1179261958765026",
-        clientSecret    : "c8016dee50452fc86ef9f76738f7a2da",
-        callbackURL     : "http://localhost:3000/auth/facebook/callback"
+        clientID        : configurationAuth.facebookAuth.clientID,
+        clientSecret    : configurationAuth.facebookAuth.clientSecret,
+        callbackURL     : configurationAuth.facebookAuth.callbackURL
     };
 
     var googleConfig = {
-        clientID        : "1060475494658-r67rnsg9hcdvuo2r0c6nhuojs74ube2v.apps.googleusercontent.com",
-        clientSecret    : "_Ds3xftvFRlsgUQEnIwrEUMK",
-        callbackURL     : "http://127.0.0.1:3000/auth/google/callback"
+        clientID        : configurationAuth.googleAuth.clientID,
+        clientSecret    : configurationAuth.googleAuth.clientSecret,
+        callbackURL     : configurationAuth.googleAuth.callbackURL
     };
 
 

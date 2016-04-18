@@ -10,6 +10,7 @@ module.exports = function(app, userModel){
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
     var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
+    var bcrypt = require("bcrypt-nodejs");
 
 
     var facebookConfig = {
@@ -17,6 +18,8 @@ module.exports = function(app, userModel){
         clientSecret    : configurationAuth.facebookAuth.clientSecret,
         callbackURL     : configurationAuth.facebookAuth.callbackURL
     };
+
+
 
     var googleConfig = {
         clientID        : configurationAuth.googleAuth.clientID,
@@ -149,29 +152,47 @@ module.exports = function(app, userModel){
 
     function register(req, res) {
         var user = req.body;
-        userModel.createUser(user).then(function(response){
-            req.session.currentUser = response;
-            res.json(response);
-        });
+        userModel.createUser(user).then(
+            //req.session.currentUser = response;
+            //res.json(response);
+            function(user){
+                if(user){
+                    req.login(user, function(err) {
+                        if(err) {
+                            res.status(400).send(err);
+                        } else {
+                            res.json(user);
+                        }
+                    });
+                }
+            },
+            function(err){
+                res.status(400).send(err);
+            }
+        );
 
-
-
-    }
+    };
 
     function localStrategy(username, password, done) {
-        console.log("LocalStrategy");
-        console.log(username);
-        console.log(password);
+        //console.log("LocalStrategy");
+        //console.log(username);
+        //console.log(password);
         var credentials = {
-            username : username,
-            password : password
+            username : username
         };
         userModel
             .findUserByCredentials(credentials)
             .then(
             function(user) {
-                if (!user) { return done(null, false); }
-                return done(null, user);
+                //console.log("A");
+                //console.log(user && bcrypt.compareSync(password, user.password));
+                var hash = bcrypt.hashSync(user.password);
+                //console.log(user && bcrypt.compareSync(password, hash));
+               if(user && bcrypt.compareSync(password, hash)) {
+                    return done(null, user);
+                }else{
+                   return done(null, false);
+               }
             },
             function(err) {
                 if (err) { return done(err); }
@@ -220,7 +241,10 @@ module.exports = function(app, userModel){
     }
 
     function loggedin(req, res) {
+        //console.log(req);
         //res.json(req.session.currentUser);
+        //console.log(req.user);
+        //console.log(req.isAuthenticated());
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 

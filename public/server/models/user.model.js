@@ -153,8 +153,8 @@ module.exports = function(mongoose, db) {
         var deferred = q.defer();
         userModel.findOne(
             // first argument is predicate
-            { username: credentials.username,
-                password: credentials.password },
+            { username: credentials.username},
+                //password: credentials.password },
 
             // doc is unique instance matches predicate
             function(err, doc) {
@@ -163,6 +163,7 @@ module.exports = function(mongoose, db) {
                     // reject promise if error
                     deferred.reject(err);
                 } else {
+                    //console.log(doc);
                     deferred.resolve(doc);
                 }
             });

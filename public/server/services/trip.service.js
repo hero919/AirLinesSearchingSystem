@@ -4,7 +4,7 @@
 module.exports = function(app, userModel, flightModel, hotelModel,contactModel){
 
     var q = require("q");
-    var sendgrid = require("sendgrid")("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");
+    var sendgrid = require("sendgrid")(process.env.sendGridKey);
 
 
     app.post("/api/project/airlines/contact", addContact);

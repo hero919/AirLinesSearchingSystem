@@ -6,7 +6,6 @@ var q = require('q');
 module.exports = function(mongoose, db) {
 
     var flightSchema = require('./flight.schema.server.js')(mongoose);
-    //console.log(flightSchema);
     var flightModel = mongoose.model('project.airlinessearchingsystem.flightInfo', flightSchema);
 
 

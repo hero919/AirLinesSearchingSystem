@@ -251,7 +251,6 @@
             </div>
 
         <hr class="style01"/>
-
     </div>
 </div>
 
@@ -264,18 +263,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h1 class="modal-title">{{hotelName}}</h1>
+                <h1 class="modal-title">{{hotel.property_name}}</h1>
             </div>
             <div class="modal-body">
                 <!--<div class="row">-->
                 <div>
-                    <div>
-                        <h3>{{hotel.contacts[0].detail}}</h3>
+                    <div ng-if="contactDetail != null">
+                        <h3>{{contactDetail}}</h3>
                     </div>
                     <div>
                         <h3>
-                            {{hotel.address.line1 + ", "+ hotel.address.city + " ,"
-                            + hotel.address.region}}
+                            {{address}}
                         </h3>
                     </div>
                     <div ng-if="marketing_text">

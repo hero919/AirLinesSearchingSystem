@@ -29,9 +29,7 @@
                     maxHotels : $routeParams.maxHotels
                 };
                 $scope.SearchHotel = hotel;
-                //console.log(flightStatesService.searchHotelByLocation(hotel).value);
                 flightStatesService.searchHotelByLocation(hotel).then(function(response){
-                    //console.log(response.data.results);
                     $scope.findHotels = response.data.results;
                     if(response.data.results.length==0){
                         $scope.message = "Please enter the valid check in or check out date";
@@ -45,10 +43,6 @@
 
         }
         init();
-
-
-
-
 
 
         function checkObjectInArray(hotel){
@@ -85,10 +79,8 @@
                         userLikeHotelsArray.push(component);
                         userLikeHotels.push(hotels.data[i].property_code);
                     }
-                    //console.log(userLikeFlightsArray);
                     $scope.userLikeHotelsArray = userLikeHotelsArray;
                     $scope.userLikeHotels = userLikeHotels;
-                    console.log(userLikeHotelsArray);
                 }
             );
             return userLikeHotelsArray;
@@ -102,20 +94,27 @@
             tripService.userLikeHotel(hotel,$routeParams.checkInDate, $routeParams.checkOutDate);
             getAllUserLikes();
         }
-       // $scope.findHotels = "asd";
+
 
 
         function getHotelDetails(hotel){
             $scope.hotelName = hotel.property_name;
-            //偷懒了
-            $scope.descriptionArray = hotel.rooms[0].descriptions;
+            if(hotel.length > 0){
+                $scope.contactDetail = hotel.contacts[0].detail
+            }else{
+                $scope.contactDetail = null;
+            }
+
+            $scope.address = hotel.address.line1 + ", "+ hotel.address.city + " ,"
+                + hotel.address.region;
+            if(hotel.rooms.length > 0) {
+                $scope.descriptionArray = hotel.rooms[0].descriptions;
+                $scope.room_type_info = hotel.rooms[0].room_type_info;
+            }
+            
             $scope.marketing_text = hotel.marketing_text;
-            $scope.room_type_info = hotel.rooms[0].room_type_info;
             $scope.awardArray = hotel.awards;
         }
-
-
-
 
         //function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
         //    var R = 6371; // Radius of the earth in km
@@ -149,10 +148,8 @@
                 hotel.radius +
                 '/maxHotels/' +
                 hotel.maxHotels);
-
         }
-
-
+        
     }
 
 })();

@@ -174,7 +174,6 @@
                 day +
                 '/maxFlight/' +
                 maxFlights);
-            //console.log("Search");
         }
 
     }

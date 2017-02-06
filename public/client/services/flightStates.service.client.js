@@ -42,7 +42,7 @@
 
 
         function searchHotelByIdAndDate(hotelId, checkIndate, checkOutDate){
-            var apiKey = "yHpnDMZo7eixGRwzE5hitP9KhxMFU8zb";
+            var apiKey = "tojAiF5oSrDPRNsPwqTydaqPXhfwP2p9";
             var URL = "https://api.sandbox.amadeus.com/v1.2/hotels/" +
                 hotelId +
                 "?apikey=" +
@@ -61,7 +61,7 @@
 
         function searchHotelByLocation(hotel) {
 
-            var apiKey = "yHpnDMZo7eixGRwzE5hitP9KhxMFU8zb";
+            var apiKey = "tojAiF5oSrDPRNsPwqTydaqPXhfwP2p9";
             var location = hotel.location;
             var checkInDate = hotel.checkIn;
             var checkOutDate = hotel.checkOut;
